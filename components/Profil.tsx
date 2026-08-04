@@ -47,7 +47,11 @@ export default function Profil() {
 
         <div className="profil-grid">
           <div className="profil-logo-card fade-in-left">
-            <div className="profil-logo-wrapper">{sekolah.inisial}</div>
+            {sekolah.logoUrl ? (
+              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`} style={{ width: 120, height: 120, objectFit: "contain", marginBottom: "1rem" }} />
+            ) : (
+              <div className="profil-logo-wrapper">{sekolah.inisial}</div>
+            )}
             <h3 className="profil-school-name">{sekolah.namaSingkat}</h3>
             <p className="profil-school-sub">
               Sekolah Menengah Pertama

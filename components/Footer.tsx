@@ -27,7 +27,11 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="footer-brand">
           <div className="footer-logo">
-            <div className="footer-logo-img">{sekolah.inisial}</div>
+            {sekolah.logoUrl ? (
+              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`} style={{ width: 40, height: 40, objectFit: "contain" }} />
+            ) : (
+              <div className="footer-logo-img">{sekolah.inisial}</div>
+            )}
             <div>
               <div className="footer-logo-text">{sekolah.namaSingkat}</div>
               <div className="footer-logo-sub">NPSN: {sekolah.npsn}</div>

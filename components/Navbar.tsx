@@ -105,7 +105,11 @@ export default function Navbar() {
               scrollToSection("#home");
             }}
           >
-            <div className="nav-logo-img">{sekolah.inisial}</div>
+            {sekolah.logoUrl ? (
+              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`} style={{ width: 40, height: 40, objectFit: "contain" }} />
+            ) : (
+              <div className="nav-logo-img">{sekolah.inisial}</div>
+            )}
             <div>
               <div style={{ fontSize: "0.9375rem", fontWeight: 700, lineHeight: 1.2 }}>
                 {sekolah.namaSingkat}
