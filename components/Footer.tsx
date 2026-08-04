@@ -84,7 +84,7 @@ export default function Footer() {
             <li>
               <span
                 className="footer-link"
-                style={{ cursor: "default", transform: "none", color: "var(--accent)", fontWeight: "bold" }}
+                style={{ cursor: "default", transform: "none", color: "var(--accent)", fontWeight: "bold", marginTop: "12px", display: "inline-block" }}
               >
                 Info Rekening:
               </span>
