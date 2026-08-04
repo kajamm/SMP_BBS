@@ -110,9 +110,6 @@ export default function Navbar() {
               <div style={{ fontSize: "0.9375rem", fontWeight: 700, lineHeight: 1.2 }}>
                 {sekolah.namaSingkat}
               </div>
-              <div style={{ fontSize: "0.6875rem", fontWeight: 400, opacity: 0.75 }}>
-                {sekolah.namaSub}
-              </div>
             </div>
           </a>
 
