@@ -1,10 +1,5 @@
 # SMP Plus Babussalam — Website Profil Sekolah (Next.js)
 
-Versi Next.js/React dari website profil sekolah **SMP PLUS BABUSSALAM**, hasil migrasi dari versi
-HTML/CSS/JS statis sebelumnya. Semua tampilan, animasi, dan fitur interaktif dipertahankan persis
-seperti versi asli, hanya arsitekturnya kini berbasis komponen React yang lebih mudah dirawat dan
-dikembangkan.
-
 ## 🚀 Cara Menjalankan
 
 ```bash
