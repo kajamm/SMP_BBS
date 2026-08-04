@@ -52,7 +52,6 @@ export default function Profil() {
             <p className="profil-school-sub">
               Sekolah Menengah Pertama
               <br />
-              {sekolah.namaSub}
             </p>
             <div className="profil-akreditasi-badge">
               <IconAward width={14} height={14} />
