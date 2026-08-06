@@ -1,46 +1,58 @@
-import type { MouseEvent } from "react";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { sekolah } from "@/data/sekolah";
-import { IconFacebook, IconInstagram, IconYoutube } from "./icons";
+import { IconFacebook, IconInstagram, IconYoutube, IconMapPin, IconMail, IconPhoneCall } from "./icons";
 
 const navLinks = [
-  { href: "#home", label: "Beranda" },
-  { href: "#profil", label: "Profil Sekolah" },
-  { href: "#visi-misi", label: "Visi & Misi" },
-  { href: "#sejarah", label: "Sejarah" },
-  { href: "#guru", label: "Data Guru" },
-  { href: "#galeri", label: "Galeri" },
-  { href: "#kontak", label: "Kontak" },
+  { href: "/", label: "Beranda" },
+  { href: "/profil", label: "Profil Sekolah" },
+  { href: "/visi-misi", label: "Visi & Misi" },
+  { href: "/sejarah", label: "Sejarah" },
+  { href: "/guru", label: "Data Guru" },
+  { href: "/galeri", label: "Galeri" },
+  { href: "/kontak", label: "Kontak" },
 ];
 
-const scrollTo = (href: string) => (e: MouseEvent) => {
-  e.preventDefault();
-  const target = document.querySelector(href);
-  if (target) {
-    const offsetTop = (target as HTMLElement).offsetTop - 70;
-    window.scrollTo({ top: offsetTop, behavior: "smooth" });
-  }
-};
-
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   return (
     <footer role="contentinfo">
-      <div className="footer-grid">
-        <div className="footer-brand">
+      {/* CTA Banner */}
+      {isHome && (
+        <div className="footer-cta">
+          <div className="footer-cta-inner">
+            <div className="footer-cta-text">
+              <h3 className="footer-cta-heading">Bergabung Bersama Kami!</h3>
+              <p className="footer-cta-sub">Buka pintu masa depanmu di {sekolah.namaSingkat}</p>
+            </div>
+            <Link href="/daftar" className="footer-cta-btn">
+              Daftar Sekarang
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Footer Main */}
+      <div className="footer-main">
+        {/* Top Row: Logo + Sosmed */}
+        <div className="footer-top-row">
           <div className="footer-logo">
             {sekolah.logoUrl ? (
-              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`} style={{ width: 40, height: 40, objectFit: "contain" }} />
+              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`}
+                style={{ width: 44, height: 44, objectFit: "contain" }} />
             ) : (
               <div className="footer-logo-img">{sekolah.inisial}</div>
             )}
             <div>
               <div className="footer-logo-text">{sekolah.namaSingkat}</div>
-              <div className="footer-logo-sub">NPSN: {sekolah.npsn}</div>
+              <div className="footer-logo-sub">Islamic Boarding School</div>
             </div>
           </div>
-          <p className="footer-desc">
-            Sekolah unggulan yang berdedikasi mencetak generasi cerdas, berkarakter, dan berdaya
-            saing global sejak tahun {sekolah.tahunBerdiri}.
-          </p>
+
           <div className="footer-sosmed">
             <a href="#" className="footer-sosmed-btn" aria-label="Facebook">
               <IconFacebook />
@@ -54,66 +66,51 @@ export default function Footer() {
           </div>
         </div>
 
-        <div>
-          <h4 className="footer-links-title">Navigasi</h4>
-          <ul className="footer-links-list" role="list">
-            {navLinks.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="footer-link" onClick={scrollTo(l.href)}>
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="footer-divider"></div>
 
-        <div>
-          <h4 className="footer-links-title">Info Kontak</h4>
-          <ul className="footer-links-list" role="list">
-            <li>
-              <a href="https://instagram.com" className="footer-link">
-                {sekolah.instagram}
-              </a>
-            </li>
-            <li>
-              <a href={`mailto:${sekolah.email}`} className="footer-link">
+        {/* Contact 3-columns */}
+        <div className="footer-contact-row">
+          <div className="footer-contact-item">
+            <div className="footer-contact-icon">
+              <IconMapPin />
+            </div>
+            <div>
+              <div className="footer-contact-label">Address</div>
+              <div className="footer-contact-value">{sekolah.alamat}</div>
+            </div>
+          </div>
+
+          <div className="footer-contact-item">
+            <div className="footer-contact-icon">
+              <IconMail />
+            </div>
+            <div>
+              <div className="footer-contact-label">E-Mail</div>
+              <a href={`mailto:${sekolah.email}`} className="footer-contact-value footer-contact-link">
                 {sekolah.email}
               </a>
-            </li>
-            <li>
-              <a href="#kontak" className="footer-link" onClick={scrollTo("#kontak")}>
-                {sekolah.website}
-              </a>
-            </li>
-            <li>
-              <span
-                className="footer-link"
-                style={{ cursor: "default", transform: "none", color: "var(--accent)", fontWeight: "bold", marginTop: "12px", display: "inline-block" }}
-              >
-                Info Rekening:
-              </span>
-            </li>
-            <li>
-              <span
-                className="footer-link"
-                style={{ cursor: "default", transform: "none", fontSize: "0.875rem" }}
-              >
-                {sekolah.rekening.bank}
-                <br />
-                Rek: {sekolah.rekening.nomor}
-                <br />
-                a.n. {sekolah.rekening.atasNama}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <div className="footer-bottom">
-        <p>
-          © <span id="current-year">{new Date().getFullYear()}</span> {sekolah.namaSingkat}. Hak
-          Cipta Dilindungi. | Dibuat dengan ❤️ untuk Pendidikan Indonesia
-        </p>
+          <div className="footer-contact-item">
+            <div className="footer-contact-icon">
+              <IconPhoneCall />
+            </div>
+            <div>
+              <div className="footer-contact-label">Instagram</div>
+              <div className="footer-contact-value">{sekolah.instagram}</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-divider"></div>
+
+        {/* Bottom: Copyright */}
+        <div className="footer-bottom-row">
+          <p>
+            {new Date().getFullYear()} &copy; {sekolah.namaSingkat}. Hak Cipta Dilindungi.
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { guruList } from "@/data/guru";
-import { IconUsers, IconEye, IconBook, IconGraduation } from "./icons";
+import { IconUsers, IconBook } from "./icons";
 
 export default function Guru() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -54,37 +54,24 @@ export default function Guru() {
               aria-label={`Profil Guru: ${guru.nama}`}
               key={guru.nama}
               ref={(el) => {
-                cardRefs.current[i] = el;
+                if (el) cardRefs.current[i] = el;
               }}
               style={{
                 opacity: 0,
                 transform: "translateY(30px)",
                 transition: "opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease",
+                padding: "24px 20px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+                borderTop: "4px solid var(--primary)"
               }}
             >
-              <div className="guru-photo-wrapper">
-                <div
-                  className="guru-photo-placeholder"
-                  style={{ background: guru.gradient }}
-                >
-                  {guru.initial}
-                </div>
-                <div className="guru-photo-overlay">
-                  <IconEye />
-                </div>
-              </div>
-              <div className="guru-info">
-                <span className="guru-jabatan-badge">{guru.jabatan}</span>
-                <h3 className="guru-name">{guru.nama}</h3>
-                <p className="guru-mapel">
-                  <IconBook />
-                  {guru.mapel}
-                </p>
-                <p className="guru-pendidikan">
-                  <IconGraduation />
-                  {guru.pendidikan}
-                </p>
-              </div>
+              <h3 className="guru-name" style={{ fontSize: '1.125rem', marginBottom: 0 }}>{guru.nama}</h3>
+              <p className="guru-mapel" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <IconBook />
+                {guru.mapel}
+              </p>
             </div>
           ))}
         </div>

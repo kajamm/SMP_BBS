@@ -1,39 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { sekolah, timeline } from "@/data/sekolah";
-import { IconClock, IconBuilding, IconTrophy } from "./icons";
-
-const icons: Record<string, JSX.Element> = {
-  school: <IconBuilding />,
-  graduationCap: <IconTrophy />,
-};
+import { IconClock } from "./icons";
 
 export default function Sejarah() {
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add("visible");
-            }, 100 * i);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    itemRefs.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="sejarah" aria-label="Sejarah Sekolah">
       <div className="section-container">
@@ -49,46 +19,18 @@ export default function Sejarah() {
           </p>
         </div>
 
-        <div className="timeline" role="list">
-          {timeline.map((item, i) => {
-            const contentBlock = (
-              <div className="timeline-content">
-                <div className="timeline-icon">{icons[item.icon]}</div>
-                <h3 className="timeline-title">{item.title}</h3>
-                <p className="timeline-desc">{item.desc}</p>
+        <div className="sejarah-steps" role="list">
+          {timeline.map((item, i) => (
+            <div className="sejarah-step fade-in" key={item.year} role="listitem"
+              style={{ transitionDelay: `${i * 0.15}s` }}>
+              <div className="sejarah-step-num">{String(i + 1).padStart(2, "0")}</div>
+              <div className="sejarah-step-body">
+                <div className="sejarah-step-year">{item.year}</div>
+                <h3 className="sejarah-step-title">{item.title}</h3>
+                <p className="sejarah-step-desc">{item.desc}</p>
               </div>
-            );
-            const yearBlock = (
-              <div style={{ display: "flex", justifyContent: "center", paddingTop: 20 }}>
-                <div className="timeline-year-badge">{item.year}</div>
-              </div>
-            );
-
-            return (
-              <div
-                className="timeline-item"
-                role="listitem"
-                key={item.year}
-                ref={(el) => {
-                  itemRefs.current[i] = el;
-                }}
-              >
-                {i % 2 === 0 ? (
-                  <>
-                    {contentBlock}
-                    {yearBlock}
-                    <div></div>
-                  </>
-                ) : (
-                  <>
-                    <div></div>
-                    {yearBlock}
-                    {contentBlock}
-                  </>
-                )}
-              </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

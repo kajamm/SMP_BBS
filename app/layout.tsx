@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollTop from "@/components/ScrollTop";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "SMP Plus Babussalam | Profil Sekolah",
+  title: "SMP Plus Babussalam",
   description:
     "Website resmi SMP PLUS BABUSSALAM - Sekolah unggulan yang berdedikasi mencetak generasi cerdas, berkarakter, dan berdaya saing global.",
   keywords: "SMP Plus Babussalam, profil sekolah, SMP terbaik",
@@ -26,7 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ScrollReveal />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <ScrollTop />
+      </body>
     </html>
   );
 }

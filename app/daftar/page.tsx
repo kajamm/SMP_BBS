@@ -1,0 +1,15 @@
+import Daftar from "@/components/Daftar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pendaftaran Siswa Baru | SMP Plus Babussalam",
+  description: "Informasi Pendaftaran Peserta Didik Baru (PPDB) SMP Plus Babussalam",
+};
+
+export default function DaftarPage() {
+  return (
+    <main>
+      <Daftar />
+    </main>
+  );
+}

@@ -18,7 +18,7 @@ export const sekolah = {
   stats: [
     { target: 30, suffix: "+", label: "Guru & Staff" },
     { target: 103, suffix: "+", label: "Siswa Aktif" },
-    { target: 6, suffix: "", label: "Rombel/Kelas" },
+    { target: 6, suffix: "", label: "Kelas" },
     { target: 1983, suffix: "", label: "Tahun Berdiri" },
   ],
   jamOperasional: [
@@ -32,7 +32,7 @@ export const sekolah = {
     nomor: "7353021936",
     atasNama: "SMP PLUS BABUSSALAM",
   },
-  mapsUrl: "https://maps.google.com?q=SMP+Bhakti+Bangsa+Sejahtera",
+  mapsUrl: "https://maps.app.goo.gl/G13xEjoA8e4RfFXj6",
 };
 
 export const visi =
