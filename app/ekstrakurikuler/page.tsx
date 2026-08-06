@@ -17,7 +17,20 @@ export default function EkstrakurikulerPage() {
             </p>
           </div>
           
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "32px", marginTop: "32px" }} className="fade-in">
+          <div style={{ 
+            display: "flex", 
+            gap: "32px", 
+            marginTop: "32px", 
+            overflowX: "auto", 
+            paddingBottom: "32px", 
+            scrollSnapType: "x mandatory",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none"
+          }} className="fade-in hide-scrollbar"
+          >
+            <style>{`
+              .hide-scrollbar::-webkit-scrollbar { display: none; }
+            `}</style>
             {[
               { nama: "Pramuka", kategori: "Wajib", deskripsi: "Membentuk karakter disiplin, mandiri, dan gotong royong." },
               { nama: "Pencak Silat", kategori: "Olahraga", deskripsi: "Membina ketangkasan fisik dan pelestarian budaya bangsa." },
@@ -26,7 +39,7 @@ export default function EkstrakurikulerPage() {
               { nama: "English Club", kategori: "Akademik", deskripsi: "Melatih kemampuan berbahasa Inggris aktif dan pasif." },
               { nama: "Karya Ilmiah Remaja (KIR)", kategori: "Akademik", deskripsi: "Mengembangkan nalar kritis dan budaya meneliti bagi siswa." },
             ].map((ekskul, i) => (
-              <div key={i} className="glass" style={{ display: "flex", flexDirection: "column", borderRadius: "16px", overflow: "hidden", border: "1px solid var(--border)", transition: "transform 0.3s ease, box-shadow 0.3s ease" }}>
+              <div key={i} className="glass" style={{ display: "flex", flexDirection: "column", borderRadius: "16px", overflow: "hidden", border: "1px solid var(--border)", transition: "transform 0.3s ease, box-shadow 0.3s ease", minWidth: "320px", flexShrink: 0, scrollSnapAlign: "start" }}>
                 {/* Image Placeholder */}
                 <div style={{ width: "100%", height: "200px", backgroundColor: "rgba(22, 163, 74, 0.1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>

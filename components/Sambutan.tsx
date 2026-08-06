@@ -51,7 +51,7 @@ export default function Sambutan() {
             </p>
           </div>
 
-          <Link href="/profil" className="btn-primary" style={{ display: "inline-flex", marginTop: "24px" }}>
+          <Link href="/profil" className="btn-primary" style={{ display: "inline-flex", marginTop: "40px" }}>
             Profile Pesantren
           </Link>
         </div>

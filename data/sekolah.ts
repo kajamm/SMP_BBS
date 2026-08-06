@@ -2,7 +2,7 @@ export const sekolah = {
   namaSingkat: "SMP PLUS BABUSSALAM",
   namaLengkap: "SMP PLUS BABUSSALAM",
   inisial: "BBS",
-  logoUrl: "", // Isi dengan "/logo.png" jika gambar sudah dimasukkan ke folder public
+  logoUrl: "https://ui-avatars.com/api/?name=BBS&background=007A43&color=fff&rounded=true&bold=true", // Placeholder dummy logo
   motto: "Cerdas, Berkarakter, dan Berdaya Saing Global",
   npsn: "20252483",
   akreditasi: "A",

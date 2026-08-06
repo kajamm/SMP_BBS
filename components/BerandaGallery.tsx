@@ -7,7 +7,7 @@ import { IconInstagram } from "./icons";
 const galleryData = [
   { id: 1, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400&auto=format&fit=crop" },
   { id: 2, image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?q=80&w=400&auto=format&fit=crop" },
-  { id: 3, image: "https://images.unsplash.com/photo-1523580846011-d3a5ce258281?q=80&w=400&auto=format&fit=crop" },
+  { id: 3, image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400&auto=format&fit=crop" },
   { id: 4, image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400&auto=format&fit=crop" },
   { id: 5, image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" },
   { id: 6, image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400&auto=format&fit=crop" },

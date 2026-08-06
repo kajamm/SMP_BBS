@@ -22,7 +22,16 @@ export default function Hero() {
       </div>
 
       {/* Main Hero Content - full width, text anchored to bottom-left */}
-      <div className="hero-content-pb" style={{ padding: "140px 24px 100px", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--bg)", position: "relative", overflow: "hidden" }}>
+      <div className="hero-content-pb" style={{ 
+        padding: "100px 24px 80px", 
+        minHeight: "100vh", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "center", 
+        background: "linear-gradient(rgba(252, 252, 249, 0.85), rgba(252, 252, 249, 0.95)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat",
+        position: "relative", 
+        overflow: "hidden" 
+      }}>
 
         {/* Modern Education Floating Shapes */}
         <div style={{ position: "absolute", top: "15%", left: "10%", width: "300px", height: "300px", background: "radial-gradient(circle, rgba(250, 204, 21, 0.15) 0%, transparent 70%)", borderRadius: "50%", zIndex: 1 }}></div>
@@ -52,11 +61,11 @@ export default function Hero() {
               Selamat Datang di {sekolah.namaSingkat}
             </span>
             <h1 style={{
-              fontSize: "clamp(2.8rem, 6vw, 5.2rem)",
+              fontSize: "clamp(2rem, 5vw, 4rem)",
               fontWeight: 900,
               color: "var(--primary)",
               lineHeight: 1.15,
-              marginBottom: "32px",
+              marginBottom: "24px",
               fontFamily: "var(--font-heading)"
             }}>
               Rumah Kedua untuk Mencetak <br />
@@ -76,13 +85,13 @@ export default function Hero() {
               </span> Berwawasan Global.
             </h1>
             <p style={{
-              fontSize: "1.2rem",
+              fontSize: "1.1rem",
               color: "#334155",
               fontWeight: 500,
-              marginBottom: "48px",
+              marginBottom: "32px",
               maxWidth: "680px",
-              margin: "0 auto 48px auto",
-              lineHeight: 1.7
+              margin: "0 auto 32px auto",
+              lineHeight: 1.6
             }}>
               Membangun fondasi akhlak islami, karakter tangguh, dan kecakapan abad 21 melalui pendekatan belajar yang smart, modern, dan penuh kekeluargaan.
             </p>
@@ -119,8 +128,8 @@ export default function Hero() {
                 href="/ekstrakurikuler"
                 style={{
                   padding: "18px 40px",
-                  backgroundColor: "white",
-                  color: "var(--brand-green)",
+                  backgroundColor: "var(--brand-green)",
+                  color: "black",
                   borderRadius: "99px",
                   fontWeight: 700,
                   fontSize: "1.05rem",
@@ -128,18 +137,15 @@ export default function Hero() {
                   alignItems: "center",
                   gap: "10px",
                   transition: "all 0.3s ease",
-                  border: "2px solid var(--brand-green)",
-                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)"
+                  boxShadow: "0 10px 25px rgba(22, 163, 74, 0.3)"
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.backgroundColor = "var(--brand-green)";
-                  e.currentTarget.style.color = "white";
+                  e.currentTarget.style.boxShadow = "0 15px 35px rgba(22, 163, 74, 0.45)";
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.backgroundColor = "white";
-                  e.currentTarget.style.color = "var(--brand-green)";
+                  e.currentTarget.style.boxShadow = "0 10px 25px rgba(22, 163, 74, 0.3)";
                 }}
               >
                 Lihat Program Kami

@@ -175,17 +175,9 @@ export default function Navbar() {
           </ul>
 
           <div className="nav-actions">
-            <button
-              id="dark-toggle"
-              aria-label="Ganti tema gelap/terang"
-              title="Toggle dark mode"
-              onClick={toggleDark}
-            >
-              {dark ? <IconSun /> : <IconMoon />}
-            </button>
 
             <Link href="/daftar" className="nav-cta-btn">
-              Daftar Sekarang
+              Penerimaan Siswa Baru
             </Link>
 
             <button

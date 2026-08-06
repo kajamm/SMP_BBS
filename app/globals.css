@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ===== CSS VARIABLES ===== */
 :root, .dark {
@@ -19,7 +19,7 @@
     --radius: 12px;
     --radius-lg: 24px;
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --font-heading: 'Playfair Display', serif;
+    --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
 
@@ -3323,8 +3323,10 @@ h2 {
 .sambutan-grid {
     display: grid;
     grid-template-columns: 350px 1fr;
-    gap: 60px;
-    align-items: flex-start;
+    gap: 80px;
+    align-items: center;
+    max-width: 1050px;
+    margin: 0 auto;
 }
 .sambutan-image-wrapper {
     position: relative;
@@ -3348,21 +3350,21 @@ h2 {
     font-size: 1.125rem;
     color: var(--primary);
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
 }
 .sambutan-greeting {
-    font-weight: 700;
-    font-style: italic;
-    color: var(--text);
-    margin-bottom: 12px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text-muted);
+    margin-bottom: 20px;
 }
 .sambutan-text {
     font-size: 1rem;
     color: var(--text-muted);
-    line-height: 1.8;
+    line-height: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
 }
 
 /* Berita */
