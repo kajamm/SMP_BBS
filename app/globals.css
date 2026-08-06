@@ -1400,20 +1400,20 @@ section {
 }
 
 .visi-icon-pb {
-    width: 68px;
-    height: 68px;
+    width: 56px;
+    height: 56px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 24px;
-    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.3);
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(22, 163, 74, 0.2);
 }
 
 .visi-icon-pb svg {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     color: white;
 }
 
@@ -1421,17 +1421,18 @@ section {
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 800;
     color: var(--primary);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     letter-spacing: -0.02em;
 }
 
 .visi-quote-pb {
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
     color: var(--text);
-    line-height: 1.8;
-    font-style: italic;
-    max-width: 740px;
-    margin: 0 auto 28px;
+    line-height: 1.7;
+    font-style: normal;
+    font-weight: 500;
+    max-width: 800px;
+    margin: 0 auto 32px;
 }
 
 .pilar-chips {
@@ -3179,7 +3180,7 @@ footer {
 
 @media (max-width: 768px) {
     section {
-        padding: 72px 0;
+        padding: 110px 0 60px;
     }
 
     #hamburger {

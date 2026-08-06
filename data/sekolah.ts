@@ -36,7 +36,7 @@ export const sekolah = {
 };
 
 export const visi =
-  '"Terwujudnya peserta didik yang unggul dalam ilmu pengetahuan dan teknologi, beriman dan bertakwa kepada Tuhan Yang Maha Esa, berkarakter mulia, berwawasan lingkungan, serta mampu bersaing di era global."';
+  "Terwujudnya peserta didik yang unggul dalam ilmu pengetahuan dan teknologi, beriman dan bertakwa kepada Tuhan Yang Maha Esa, berkarakter mulia, berwawasan lingkungan, serta mampu bersaing di era global.";
 
 export const pilarUtama = ["Unggul", "Beriman", "Berkarakter", "Global"];
 

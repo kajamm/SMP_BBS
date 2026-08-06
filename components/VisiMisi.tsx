@@ -1,7 +1,7 @@
 "use client";
 
 import { sekolah, visi, pilarUtama, sistemPendidikan } from "@/data/sekolah";
-import { IconEye, IconCheck } from "./icons";
+import { IconStar, IconCheck } from "./icons";
 
 export default function VisiMisi() {
   return (
@@ -10,7 +10,7 @@ export default function VisiMisi() {
         {/* Visi - centered large block */}
         <div className="visi-block fade-in">
           <div className="visi-icon-pb">
-            <IconEye />
+            <IconStar />
           </div>
           <h2 className="visi-heading-pb">Visi Sekolah</h2>
           <p className="visi-quote-pb">{visi}</p>
