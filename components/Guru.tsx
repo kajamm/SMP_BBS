@@ -60,15 +60,30 @@ export default function Guru() {
                 opacity: 0,
                 transform: "translateY(30px)",
                 transition: "opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease",
-                padding: "24px 20px",
+                padding: "24px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "8px",
-                borderTop: "4px solid var(--primary)"
+                gap: "12px",
+                borderTop: "4px solid var(--accent)",
+                background: "var(--white)",
               }}
             >
-              <h3 className="guru-name" style={{ fontSize: '1.125rem', marginBottom: 0 }}>{guru.nama}</h3>
-              <p className="guru-mapel" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{
+                width: "48px",
+                height: "48px",
+                borderRadius: "50%",
+                background: "var(--primary)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--accent)",
+                marginBottom: "4px",
+                boxShadow: "0 4px 12px rgba(0,122,67,0.15)"
+              }}>
+                <IconUsers />
+              </div>
+              <h3 className="guru-name" style={{ fontSize: '1.125rem', marginBottom: 0, color: 'var(--text)', fontWeight: 800 }}>{guru.nama}</h3>
+              <p className="guru-mapel" style={{ color: 'var(--text-muted)', fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <IconBook />
                 {guru.mapel}
               </p>

@@ -1,15 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sekolah } from "@/data/sekolah";
 import { IconWhatsapp } from "./icons";
 
 export default function WhatsAppFloat() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const waMessage = encodeURIComponent("Assalamualaikum, saya ingin bertanya tentang SMP Plus Babussalam.");
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Tampilkan tombol jika di-scroll lebih dari 100px dari atas
+      setIsVisible(window.scrollY > 100);
+    };
+
+    handleScroll(); // Cek posisi awal
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div style={{ position: "fixed", bottom: "24px", left: "24px", zIndex: 9999 }} className="fade-in-up">
+    <div 
+      style={{ 
+        position: "fixed", 
+        bottom: "24px", 
+        left: "24px", 
+        zIndex: 9999,
+        opacity: isVisible ? 1 : 0,
+        visibility: isVisible ? "visible" : "hidden",
+        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transition: "all 0.3s ease",
+        pointerEvents: isVisible ? "auto" : "none"
+      }}
+    >
       {/* Popup Box */}
       {isOpen && (
         <div 
