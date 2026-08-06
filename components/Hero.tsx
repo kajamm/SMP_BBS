@@ -1,19 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { sekolah } from "@/data/sekolah";
 import Counter from "./Counter";
 import {
-  IconInfo,
-  IconPhoneCall,
   IconUsers,
   IconGraduation,
   IconBuilding,
   IconCalendar,
 } from "./icons";
-
-
-const pillars = ["Unggul", "Beriman", "Berkarakter", "Global"];
 
 export default function Hero() {
   return (
@@ -30,12 +24,7 @@ export default function Hero() {
       {/* Main Hero Content - full width, text anchored to bottom-left */}
       <div className="hero-content-pb">
         <div className="hero-main-area">
-          {/* Pillar keywords - vertical list */}
-          <div className="hero-pillars" aria-hidden="true">
-            {pillars.map((p) => (
-              <span key={p} className="hero-pillar-tag">{p}</span>
-            ))}
-          </div>
+
 
           {/* Big heading */}
           <div className="hero-text-block">
@@ -43,16 +32,6 @@ export default function Hero() {
               {sekolah.namaSingkat}
             </h1>
             <p className="hero-motto-pb">&ldquo;{sekolah.motto}&rdquo;</p>
-            <div className="hero-buttons-pb">
-              <Link href="/profil" className="btn-primary-pb">
-                <IconInfo width={18} height={18} />
-                Tentang Kami
-              </Link>
-              <Link href="/kontak" className="btn-outline-pb">
-                <IconPhoneCall width={18} height={18} />
-                Hubungi Kami
-              </Link>
-            </div>
           </div>
         </div>
 
@@ -78,7 +57,7 @@ export default function Hero() {
             <div className="hero-stat-num"><Counter target={6} /></div>
             <div className="hero-stat-lbl">
               <IconBuilding width={13} height={13} />
-              Rombel/Kelas
+              Kelas
             </div>
           </div>
           <div className="hero-stat-divider"></div>

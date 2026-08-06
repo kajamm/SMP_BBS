@@ -11,7 +11,11 @@ export const sekolah = {
   alamat:
     "Jl. Ciburial Indah Dago Atas Bandung, RT 1/RW 1, Kel. Ciburial, Kec. Cimenyan, Kab. Bandung, Jawa Barat 40198",
   email: "babussalamdago@gmail.com",
+  telepon: "+62 812-3456-7890",
+  whatsapp: "6281234567890",
   instagram: "@smpplusbabussalam",
+  instagramUrl: "https://www.instagram.com/smpplusbabussalam/",
+  youtubeUrl: "https://www.youtube.com/@SmpPlusBabussalam",
   website: "www.babussalamdago.com",
   skPendirian: "527/I02.7/Kep/OT/1997, tanggal 6 November 1997",
   tahunBerdiri: 1983,
@@ -49,7 +53,7 @@ export const pilarUtama = ["Unggul", "Beriman", "Berkarakter", "Global"];
 
 export const sistemPendidikan = [
   "Sistem full-day, 6 hari belajar per minggu.",
-  "Menggunakan kurikulum integral — memadukan kurikulum Kemendikbud dengan kurikulum kepesantrenan (nahwu-sharaf, fiqh, tafsir, hadits, aqidah-akhlak, khitabah).",
+  "Menggunakan kurikulum integral, memadukan kurikulum Kemendikbud dengan kurikulum kepesantrenan (nahwu-sharaf, fiqh, tafsir, hadits, aqidah-akhlak, khitabah).",
   "Santri tingkat SMP dan SMA diwajibkan tinggal di asrama.",
   "Target hafalan: siswa kelas 3 SMP ditargetkan hafal Al-Quran juz 29.",
 ];

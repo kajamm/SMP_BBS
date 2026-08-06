@@ -11,6 +11,7 @@ import {
   IconPhoneCall,
   IconGlobe,
   IconCalendar,
+  IconInstagram,
 } from "./icons";
 
 const items = [
@@ -24,7 +25,7 @@ const items = [
   },
   { icon: <IconMapPin />, label: "Alamat Lengkap", value: sekolah.alamat, full: true },
   { icon: <IconMail />, label: "Email", value: sekolah.email },
-  { icon: <IconPhoneCall />, label: "Instagram", value: sekolah.instagram },
+  { icon: <IconInstagram />, label: "Instagram", value: sekolah.instagram, href: sekolah.instagramUrl },
   { icon: <IconGlobe />, label: "Website", value: sekolah.website },
   { icon: <IconCalendar />, label: "SK Pendirian", value: sekolah.skPendirian },
 ];
@@ -101,7 +102,13 @@ export default function Profil() {
                   <div className="profil-info-icon">{item.icon}</div>
                   <div>
                     <div className="profil-info-label">{item.label}</div>
-                    <div className="profil-info-value">{item.value}</div>
+                    {item.href ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="profil-info-value" style={{ textDecoration: "none", color: "var(--primary)" }}>
+                        {item.value}
+                      </a>
+                    ) : (
+                      <div className="profil-info-value">{item.value}</div>
+                    )}
                   </div>
                 </div>
               ))}

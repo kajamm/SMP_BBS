@@ -7,7 +7,6 @@ import {
   IconMapPin,
   IconMail,
   IconClock,
-  IconFacebook,
   IconInstagram,
   IconYoutube,
   IconExternalLink,
@@ -71,7 +70,9 @@ export default function Kontak() {
                   </div>
                   <div>
                     <div className="kontak-info-label">Instagram</div>
-                    <div className="kontak-info-value">{sekolah.instagram}</div>
+                    <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="kontak-info-value" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseOver={(e) => e.currentTarget.style.color = "var(--primary)"} onMouseOut={(e) => e.currentTarget.style.color = "inherit"}>
+                      {sekolah.instagram}
+                    </a>
                   </div>
                 </li>
                 <li className="kontak-info-item">
@@ -119,15 +120,11 @@ export default function Kontak() {
             <div className="sosmed-section">
               <h3 className="sosmed-title">Ikuti Kami di Media Sosial</h3>
               <div className="sosmed-links">
-                <a href="#" className="sosmed-btn facebook" aria-label={`Facebook ${sekolah.namaSingkat}`}>
-                  <IconFacebook />
-                  Facebook
-                </a>
-                <a href="#" className="sosmed-btn instagram" aria-label={`Instagram ${sekolah.namaSingkat}`}>
+                <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn instagram" aria-label={`Instagram ${sekolah.namaSingkat}`}>
                   <IconInstagram />
                   Instagram
                 </a>
-                <a href="#" className="sosmed-btn youtube" aria-label={`YouTube ${sekolah.namaSingkat}`}>
+                <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn youtube" aria-label={`YouTube ${sekolah.namaSingkat}`}>
                   <IconYoutube />
                   YouTube
                 </a>
@@ -145,9 +142,17 @@ export default function Kontak() {
                   Buka Maps
                 </a>
               </div>
-              <div className="maps-placeholder">
-                <IconMapPin strokeWidth={1.5} />
-                <p>{sekolah.alamat}</p>
+              <div style={{ width: "100%", height: "280px", borderRadius: "12px", overflow: "hidden" }}>
+                <iframe
+                  title="Lokasi SMP Plus Babussalam"
+                  src="https://maps.google.com/maps?q=SMP+Plus+Babussalam,+Bandung&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>

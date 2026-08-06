@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sekolah } from "@/data/sekolah";
-import { IconFacebook, IconInstagram, IconYoutube, IconMapPin, IconMail, IconPhoneCall } from "./icons";
+import { IconInstagram, IconYoutube, IconMapPin, IconMail, IconPhoneCall } from "./icons";
 
 const navLinks = [
   { href: "/", label: "Beranda" },
@@ -54,13 +54,10 @@ export default function Footer() {
           </div>
 
           <div className="footer-sosmed">
-            <a href="#" className="footer-sosmed-btn" aria-label="Facebook">
-              <IconFacebook />
-            </a>
-            <a href="#" className="footer-sosmed-btn" aria-label="Instagram">
+            <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="Instagram">
               <IconInstagram />
             </a>
-            <a href="#" className="footer-sosmed-btn" aria-label="YouTube">
+            <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="YouTube">
               <IconYoutube />
             </a>
           </div>
@@ -97,8 +94,10 @@ export default function Footer() {
               <IconPhoneCall />
             </div>
             <div>
-              <div className="footer-contact-label">Instagram</div>
-              <div className="footer-contact-value">{sekolah.instagram}</div>
+              <div className="footer-contact-label">Contact</div>
+              <a href={`https://wa.me/${sekolah.whatsapp}`} target="_blank" rel="noopener noreferrer" className="footer-contact-value footer-contact-link">
+                {sekolah.telepon}
+              </a>
             </div>
           </div>
         </div>
