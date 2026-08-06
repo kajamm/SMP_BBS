@@ -38,6 +38,13 @@ export const sekolah = {
 export const visi =
   "Terwujudnya peserta didik yang unggul dalam ilmu pengetahuan dan teknologi, beriman dan bertakwa kepada Tuhan Yang Maha Esa, berkarakter mulia, berwawasan lingkungan, serta mampu bersaing di era global.";
 
+export const misi = [
+  "Menyelenggarakan pendidikan yang mengintegrasikan ilmu pengetahuan umum dengan nilai-nilai kepesantrenan.",
+  "Membentuk karakter peserta didik yang beriman, bertakwa, dan berakhlak mulia.",
+  "Mewujudkan lingkungan sekolah yang bersih, sehat, dan berwawasan lingkungan.",
+  "Membekali peserta didik dengan keterampilan dan teknologi agar mampu bersaing di era global."
+];
+
 export const pilarUtama = ["Unggul", "Beriman", "Berkarakter", "Global"];
 
 export const sistemPendidikan = [

@@ -1,6 +1,6 @@
 "use client";
 
-import { sekolah, visi, pilarUtama, sistemPendidikan } from "@/data/sekolah";
+import { sekolah, visi, misi, pilarUtama, sistemPendidikan } from "@/data/sekolah";
 import { IconStar, IconCheck } from "./icons";
 
 export default function VisiMisi() {
@@ -24,6 +24,22 @@ export default function VisiMisi() {
 
         {/* Divider */}
         <div className="visi-divider"></div>
+
+        {/* Misi Sekolah */}
+        <div className="misi-block fade-in" style={{ marginBottom: "56px" }}>
+          <h2 className="misi-heading-pb">Misi Sekolah</h2>
+          <p className="misi-sub-pb">Langkah-langkah mewujudkan visi {sekolah.namaSingkat}</p>
+          <ul className="misi-list-pb" role="list">
+            {misi.map((item, i) => (
+              <li className="misi-list-item-pb" key={i}>
+                <div className="misi-check-pb">
+                  <IconCheck width={14} height={14} />
+                </div>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Sistem Pendidikan - clean list */}
         <div className="misi-block fade-in">
