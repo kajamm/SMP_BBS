@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * Replicates the original script.js scroll-reveal behaviour:
@@ -8,6 +9,8 @@ import { useEffect } from "react";
  * a `.visible` class added once they enter the viewport.
  */
 export default function useScrollReveal() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const reveal = () => {
       const elements = document.querySelectorAll(
@@ -30,5 +33,5 @@ export default function useScrollReveal() {
       window.removeEventListener("scroll", reveal);
       window.removeEventListener("resize", reveal);
     };
-  }, []);
+  }, [pathname]);
 }

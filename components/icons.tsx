@@ -287,3 +287,5 @@ export const IconMonitor = (p: SVGProps<SVGSVGElement>) => (
     <line x1="12" y1="17" x2="12" y2="21" />
   </svg>
 );
+
+
