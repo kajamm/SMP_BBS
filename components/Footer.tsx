@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sekolah } from "@/data/sekolah";
-import { IconInstagram, IconYoutube, IconMapPin, IconMail, IconPhoneCall } from "./icons";
+import { IconInstagram, IconYoutube, IconTiktok, IconMapPin, IconMail, IconPhoneCall } from "./icons";
 
 const navLinks = [
   { href: "/", label: "Beranda" },
@@ -56,6 +56,9 @@ export default function Footer() {
           <div className="footer-sosmed">
             <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="Instagram">
               <IconInstagram />
+            </a>
+            <a href={sekolah.tiktokUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="TikTok">
+              <IconTiktok />
             </a>
             <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="YouTube">
               <IconYoutube />

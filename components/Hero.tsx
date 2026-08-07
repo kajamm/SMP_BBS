@@ -22,15 +22,16 @@ export default function Hero() {
       </div>
 
       {/* Main Hero Content - full width, text anchored to bottom-left */}
-      <div className="hero-content-pb" style={{ 
-        padding: "100px 24px 80px", 
-        minHeight: "100vh", 
-        display: "flex", 
-        alignItems: "center", 
-        justifyContent: "center", 
+      <div className="hero-content-pb" style={{
+        padding: "100px 24px 80px",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
         background: "linear-gradient(rgba(252, 252, 249, 0.85), rgba(252, 252, 249, 0.95)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat",
-        position: "relative", 
-        overflow: "hidden" 
+        position: "relative",
+        overflow: "hidden"
       }}>
 
         {/* Modern Education Floating Shapes */}

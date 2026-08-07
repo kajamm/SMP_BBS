@@ -8,6 +8,7 @@ import {
   IconMail,
   IconClock,
   IconInstagram,
+  IconTiktok,
   IconYoutube,
   IconExternalLink,
   IconSend,
@@ -69,9 +70,9 @@ export default function Kontak() {
                     <IconPhoneCall />
                   </div>
                   <div>
-                    <div className="kontak-info-label">Instagram</div>
-                    <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="kontak-info-value" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseOver={(e) => e.currentTarget.style.color = "var(--primary)"} onMouseOut={(e) => e.currentTarget.style.color = "inherit"}>
-                      {sekolah.instagram}
+                    <div className="kontak-info-label">Kontak (Telepon/WA)</div>
+                    <a href={`https://wa.me/${sekolah.whatsapp}`} target="_blank" rel="noopener noreferrer" className="kontak-info-value" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseOver={(e) => e.currentTarget.style.color = "var(--primary)"} onMouseOut={(e) => e.currentTarget.style.color = "inherit"}>
+                      {sekolah.telepon}
                     </a>
                   </div>
                 </li>
@@ -123,6 +124,10 @@ export default function Kontak() {
                 <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn instagram" aria-label={`Instagram ${sekolah.namaSingkat}`}>
                   <IconInstagram />
                   Instagram
+                </a>
+                <a href={sekolah.tiktokUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn" style={{backgroundColor: '#000', color: '#fff'}} aria-label={`TikTok ${sekolah.namaSingkat}`}>
+                  <IconTiktok />
+                  TikTok
                 </a>
                 <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn youtube" aria-label={`YouTube ${sekolah.namaSingkat}`}>
                   <IconYoutube />

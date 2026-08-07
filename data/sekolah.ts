@@ -15,6 +15,7 @@ export const sekolah = {
   whatsapp: "6281234567890",
   instagram: "@smpplusbabussalam",
   instagramUrl: "https://www.instagram.com/smpplusbabussalam/",
+  tiktokUrl: "https://www.tiktok.com/@smpplusbabussalam",
   youtubeUrl: "https://www.youtube.com/@SmpPlusBabussalam",
   website: "www.babussalamdago.com",
   skPendirian: "527/I02.7/Kep/OT/1997, tanggal 6 November 1997",

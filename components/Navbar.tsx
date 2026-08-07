@@ -110,6 +110,11 @@ export default function Navbar() {
       <nav
         id="navbar"
         className={scrolled ? "scrolled" : "top"}
+        style={scrolled ? {
+          background: "rgba(0, 122, 67, 0.85)", 
+          backdropFilter: "blur(10px)", 
+          WebkitBackdropFilter: "blur(10px)"
+        } : {}}
         role="navigation"
         aria-label="Navigasi utama"
       >

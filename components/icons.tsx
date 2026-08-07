@@ -209,6 +209,12 @@ export const IconInstagram = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+export const IconTiktok = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p} viewBox="0 0 24 24">
+    <path d="M9 12a4 4 0 1 0 4 4V2a5 5 0 0 0 5 5v3a3 3 0 0 1-3-3v11a4 4 0 1 1-4-4z" />
+  </svg>
+);
+
 export const IconYoutube = (p: SVGProps<SVGSVGElement>) => (
   <svg {...base} {...p}>
     <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.41 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
