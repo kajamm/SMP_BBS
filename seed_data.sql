@@ -18,12 +18,30 @@ INSERT INTO galeri (image, caption) VALUES
 
 -- 3. Insert Data Guru
 INSERT INTO guru (nama, mapel) VALUES
-('Ahmad Fauzi, S.Pd.', 'Pendidikan Agama Islam'),
-('Siti Aminah, M.Pd.', 'Matematika'),
-('Budi Santoso, S.Pd.', 'Bahasa Inggris'),
-('Nurul Hidayah, S.Si.', 'Ilmu Pengetahuan Alam (IPA)'),
-('Drs. Ujang Haryanto', 'Ilmu Pengetahuan Sosial (IPS)'),
-('Rina Marlina, S.Pd.', 'Bahasa Indonesia');
+('Umar Yusuf, M.Sos', 'Guru PAI / Al-Qur''an'),
+('Lia Karliah, S.Pd', 'Guru Seni Budaya'),
+('Mulyana Kurniawan, M.Pd', 'Guru Tafsir'),
+('Dr. H. Fadhlullah M. Said, M.A', 'Guru Hadist'),
+('Agus Suryaman, M.A', 'Guru PAI / Bahasa Arab'),
+('Ida Farida, S.P', 'Guru IPA'),
+('Ra''idah Shabirah, S.Pd', 'Guru Bahasa Arab'),
+('Safrayani, S.Pd', 'Guru IPS'),
+('Rachma Fira, S.Hum', 'Guru Bahasa Inggris'),
+('Irfan Rahmatullah, S.Sos', 'Guru BK / Prakarya'),
+('Firmansyah, S.Pd', 'Guru PJOK'),
+('Nurul Syamiatul Ulfah, S.Pd', 'Guru Bahasa Indonesia'),
+('Ilham Nasrulloh, S.Pd', 'Guru PKN'),
+('Wina Halimatus S., S.Pd', 'Guru Bahasa Inggris / Al-Qur''an'),
+('Fikriyah Nurul Arofah, S.Ag', 'Guru Tafsir Hadist'),
+('Nurazizah', 'Guru Al-Qur''an'),
+('Nurlaela', 'Guru Al-Qur''an'),
+('Ahmad Sobirin', 'Guru Al-Qur''an'),
+('Nurwidaningsih', 'Guru Al-Qur''an'),
+('Alin Karlina, S.Pd', 'Guru Bahasa Indonesia'),
+('Aji Kurniawan', 'Guru Informatika'),
+('Rami Rahmayanti, S.Pd', 'Guru Matematika'),
+('Atina Rahmah Ichtiari, S.Pd', 'Guru Matematika'),
+('Deni Sopian, S.Pd', 'Guru PAI');
 
 -- 4. Insert Data Testimoni
 INSERT INTO testimoni (name, title, quote, image) VALUES
