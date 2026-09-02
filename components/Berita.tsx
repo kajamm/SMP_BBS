@@ -1,33 +1,27 @@
-"use client";
-
 import Image from "next/image";
 import { IconClock } from "./icons";
+import db from "@/lib/db";
 
-const beritaList = [
-  {
-    id: 1,
-    title: "Hydroponic Fun Learning with Pesantren Saintek Babussalam",
-    date: "28/11/2025",
-    image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?q=80&w=600&auto=format&fit=crop",
-    excerpt: "Serunya belajar sambil praktik! Melalui kegiatan Hydroponic Fun Learning, siswa...",
-  },
-  {
-    id: 2,
-    title: "MAHAKAM 2025 DARUL HIKAM",
-    date: "23/11/2025",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=600&auto=format&fit=crop",
-    excerpt: "Mahakam 2025 telah dilalui dengan penuh semangat oleh lebih dari...",
-  },
-  {
-    id: 3,
-    title: "KEMENKEU MENGAJAR di Pesantren Saintek Babussalam",
-    date: "10/11/2025",
-    image: "https://images.unsplash.com/photo-1523580846011-d3a5ce258281?q=80&w=600&auto=format&fit=crop",
-    excerpt: "Guest Teacher: Kemenkeu Mengajar di Pesantren Saintek Babussalam...",
-  },
-];
+interface BeritaItem {
+  id: number;
+  title: string;
+  date: string;
+  image: string;
+  excerpt: string;
+}
 
-export default function Berita() {
+export default async function Berita() {
+  let beritaList: BeritaItem[] = [];
+  
+  try {
+    const [rows] = await db.query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
+    beritaList = rows as BeritaItem[];
+  } catch (error) {
+    console.error("Error fetching berita for public:", error);
+  }
+
+  if (beritaList.length === 0) return null;
+
   return (
     <section id="berita" className="section-container" style={{ padding: "80px 24px" }}>
       <div className="section-header centered fade-in">
@@ -41,7 +35,7 @@ export default function Berita() {
         {beritaList.map((berita) => (
           <div key={berita.id} className="berita-card fade-in-up">
             <div className="berita-image-wrapper">
-              <Image src={berita.image} alt={berita.title} fill className="berita-image" />
+              <Image src={berita.image || "https://placehold.co/400x300"} alt={berita.title} fill className="berita-image" />
             </div>
             <div className="berita-content">
               <div className="berita-date">

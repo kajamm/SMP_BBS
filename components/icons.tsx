@@ -294,4 +294,9 @@ export const IconMonitor = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-
+export const IconQuote = (p: SVGProps<SVGSVGElement>) => (
+  <svg {...base} {...p}>
+    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .777-2 2v12c0 4 8 4 8 4v-4c-2 0-3 0-3-1z" />
+    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .777-2 2v12c0 4 8 4 8 4v-4c-2 0-3 0-3-1z" />
+  </svg>
+);

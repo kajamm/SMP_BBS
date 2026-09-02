@@ -1,52 +1,51 @@
-"use client";
-
 import Image from "next/image";
+import db from "@/lib/db";
+import { IconQuote } from "./icons";
 
-const testimoniData = [
-  {
-    id: 1,
-    name: "Faza Azizan Attuhrisa",
-    title: "Peraih Juara 2 Walisongo Chemistry Olympiad",
-    quote: "Suasana belajar yang nyaman membuat semangat",
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
-  },
-  {
-    id: 2,
-    name: "Setya Tegar",
-    title: "Peraih Juara 3 Student Athletics Championships",
-    quote: "Belajar dibimbing dengan profesional",
-    image: "https://randomuser.me/api/portraits/men/44.jpg",
-  },
-  {
-    id: 3,
-    name: "Satria Kamil Sya&apos;bani",
-    title: "Peraih Medali Silver Thailand International Mathematical Olympiad",
-    quote: "Belajar disini sangat menyenangkan",
-    image: "https://randomuser.me/api/portraits/men/62.jpg",
-  },
-];
+interface TestimoniItem {
+  id: number;
+  name: string;
+  title: string;
+  quote: string;
+  image: string;
+}
 
-export default function Testimoni() {
+export default async function Testimoni() {
+  let testimonis: TestimoniItem[] = [];
+  
+  try {
+    const [rows] = await db.query("SELECT * FROM testimoni ORDER BY id DESC LIMIT 3");
+    testimonis = rows as TestimoniItem[];
+  } catch (error) {
+    console.error("Error fetching testimoni for public:", error);
+  }
+
+  if (testimonis.length === 0) return null;
+
   return (
-    <section id="testimoni" className="section-container" style={{ padding: "80px 24px" }}>
+    <section id="testimoni" className="section-container" style={{ padding: "80px 24px", backgroundColor: "#f9fafb" }}>
       <div className="section-header centered fade-in">
-        <h2 className="section-title" style={{ color: "var(--primary)", fontSize: "2.5rem" }}>Testimoni</h2>
+        <h2 className="section-title" style={{ color: "var(--primary)", textTransform: "uppercase", fontSize: "2rem" }}>Kata Mereka</h2>
         <p className="section-subtitle" style={{ maxWidth: "800px", margin: "0 auto", color: "var(--text)" }}>
-          &quot;Apa kata mereka, tentang kami. Terima kasih atas penghargaan nya kepada kami&quot;
+          Apa kata siswa dan alumni tentang pengalaman belajar di SMP Plus Babussalam?
         </p>
       </div>
 
       <div className="testimoni-grid">
-        {testimoniData.map((testimoni) => (
-          <div key={testimoni.id} className="testimoni-card fade-in-up">
-            <div className="testimoni-image-wrapper">
-              <Image src={testimoni.image} alt={testimoni.name} width={120} height={120} className="testimoni-image" />
+        {testimonis.map((item) => (
+          <div key={item.id} className="testimoni-card fade-in-up">
+            <div className="testimoni-quote-icon">
+              <IconQuote width={32} height={32} color="var(--primary)" />
             </div>
-            <div className="testimoni-content">
-              <h4 className="testimoni-name">{testimoni.name}</h4>
-              <p className="testimoni-title">{testimoni.title}</p>
-              <div className="testimoni-divider"></div>
-              <p className="testimoni-quote">{testimoni.quote}</p>
+            <p className="testimoni-text">&quot;{item.quote}&quot;</p>
+            <div className="testimoni-author">
+              <div className="testimoni-avatar">
+                <Image src={item.image || "https://placehold.co/100"} alt={item.name} fill style={{ objectFit: "cover" }} />
+              </div>
+              <div className="testimoni-info">
+                <h4 className="testimoni-name">{item.name}</h4>
+                <p className="testimoni-title">{item.title}</p>
+              </div>
             </div>
           </div>
         ))}

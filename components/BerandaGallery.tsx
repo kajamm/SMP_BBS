@@ -2,20 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { IconInstagram } from "./icons";
-
-const galleryData = [
-  { id: 1, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=400&auto=format&fit=crop" },
-  { id: 2, image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?q=80&w=400&auto=format&fit=crop" },
-  { id: 3, image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400&auto=format&fit=crop" },
-  { id: 4, image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400&auto=format&fit=crop" },
-  { id: 5, image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=400&auto=format&fit=crop" },
-  { id: 6, image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=400&auto=format&fit=crop" },
-  { id: 7, image: "https://images.unsplash.com/photo-1529390079861-591de354faf5?q=80&w=400&auto=format&fit=crop" },
-  { id: 8, image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=400&auto=format&fit=crop" },
-];
+import { getGaleri, type GalleryPhoto } from "@/lib/store";
 
 export default function BerandaGallery() {
+  const [galleryData, setGalleryData] = useState<GalleryPhoto[]>([]);
+
+  useEffect(() => {
+    setGalleryData(getGaleri().slice(0, 8));
+  }, []);
+
+  if (galleryData.length === 0) return null;
+
   return (
     <section id="gallery" className="section-container" style={{ padding: "80px 24px", background: "var(--bg-alt)" }}>
       <div className="section-header centered fade-in">
@@ -51,7 +50,7 @@ export default function BerandaGallery() {
         <div className="ig-grid">
           {galleryData.map((item) => (
             <div key={item.id} className="ig-grid-item">
-              <Image src={item.image} alt="Gallery image" fill className="ig-image" />
+              <Image src={item.image} alt={item.caption || "Gallery image"} fill className="ig-image" />
             </div>
           ))}
         </div>
@@ -59,3 +58,4 @@ export default function BerandaGallery() {
     </section>
   );
 }
+

@@ -1,89 +1,50 @@
-"use client";
-
-import { useEffect, useMemo, useState } from "react";
-import { sekolah } from "@/data/sekolah";
-import { galeriItems, galeriFilters } from "@/data/galeri";
+import Image from "next/image";
+import db from "@/lib/db";
 import { IconCamera, IconExpand } from "./icons";
-import Lightbox from "./Lightbox";
 
-export default function Galeri() {
-  const [filter, setFilter] = useState<string>("all");
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+interface GalleryPhoto {
+  id: number;
+  image: string;
+  caption: string;
+}
 
-  const filteredItems = useMemo(
-    () => (filter === "all" ? galeriItems : galeriItems.filter((i) => i.category === filter)),
-    [filter]
-  );
+export default async function Galeri() {
+  let photos: GalleryPhoto[] = [];
+  
+  try {
+    const [rows] = await db.query("SELECT * FROM galeri ORDER BY id DESC LIMIT 8");
+    photos = rows as GalleryPhoto[];
+  } catch (error) {
+    console.error("Error fetching galeri for public:", error);
+  }
 
-  useEffect(() => {
-    setLightboxIndex(null);
-  }, [filter]);
+  if (photos.length === 0) return null;
 
   return (
-    <section id="galeri" aria-label="Galeri Foto">
-      <div className="section-container">
-        <div className="section-header centered fade-in">
-          <div className="section-badge">
-            <IconCamera />
-            Galeri
-          </div>
-          <h2 className="section-title">Galeri Foto Sekolah</h2>
-          <p className="section-subtitle">
-            Momen berharga dan kegiatan seru di {sekolah.namaSingkat} yang diabadikan untuk
-            kenangan.
-          </p>
-        </div>
-
-        <div className="galeri-filter" role="group" aria-label="Filter galeri">
-          {galeriFilters.map((f) => (
-            <button
-              key={f.key}
-              className={`filter-btn ${filter === f.key ? "active" : ""}`}
-              onClick={() => setFilter(f.key)}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="galeri-grid">
-          {filteredItems.map((item, idx) => (
-            <div
-              className="galeri-item"
-              key={item.id}
-              tabIndex={0}
-              role="button"
-              aria-label={`Foto ${item.overlayTitle}`}
-              onClick={() => setLightboxIndex(idx)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") setLightboxIndex(idx);
-              }}
-            >
-              <div className="galeri-img-placeholder" style={{ background: item.bg }}>
-                {item.icon}
-                <span style={{ fontSize: "0.8125rem", color: item.color, fontWeight: 600 }}>
-                  {item.label}
-                </span>
-              </div>
-              <div className="galeri-overlay">
-                <div className="galeri-overlay-content">
-                  <span className="galeri-overlay-title">{item.overlayTitle}</span>
-                  <IconExpand />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <section id="galeri" className="section-container" style={{ padding: "80px 24px", backgroundColor: "#f9fafb" }}>
+      <div className="section-header centered fade-in">
+        <h2 className="section-title" style={{ color: "var(--primary)", textTransform: "uppercase", fontSize: "2rem" }}>Galeri Kegiatan</h2>
+        <p className="section-subtitle" style={{ maxWidth: "800px", margin: "0 auto", color: "var(--text)" }}>
+          Momen-momen berharga dan kegiatan inspiratif yang mewarnai keseharian di lingkungan SMP Plus Babussalam.
+        </p>
       </div>
 
-      {lightboxIndex !== null && (
-        <Lightbox
-          items={filteredItems}
-          index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
-          onNavigate={setLightboxIndex}
-        />
-      )}
+      <div className="galeri-grid">
+        {photos.map((photo) => (
+          <div key={photo.id} className="galeri-item fade-in-up">
+            {/* Menggunakan background image agar mengisi penuh div seperti versi sebelumnya atau gunakan Image layout fill */}
+            <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "250px" }}>
+              <Image src={photo.image || "https://placehold.co/400x300"} alt={photo.caption || "Galeri"} fill style={{ objectFit: "cover" }} />
+            </div>
+            <div className="galeri-overlay">
+              <div className="galeri-overlay-content">
+                <span className="galeri-overlay-title">{photo.caption || "Kegiatan Sekolah"}</span>
+                <IconExpand />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
