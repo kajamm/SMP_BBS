@@ -60,7 +60,19 @@ export default function Profil() {
         <div className="profil-grid">
           <div className="profil-logo-card fade-in-left">
             {data.logo_url ? (
-              <img src={data.logo_url} alt={`Logo ${data.nama_singkat}`} style={{ width: 120, height: 120, objectFit: "contain", marginBottom: "1rem" }} />
+              <img
+                src={data.logo_url}
+                alt={`Logo ${data.nama_singkat}`}
+                style={{
+                  width: 130,
+                  height: 130,
+                  objectFit: "contain",
+                  display: "block",
+                  margin: "0 auto 1.25rem auto",
+                  borderRadius: "16px",
+                  boxShadow: "0 6px 18px rgba(0, 0, 0, 0.08)",
+                }}
+              />
             ) : (
               <div className="profil-logo-wrapper">{data.inisial}</div>
             )}

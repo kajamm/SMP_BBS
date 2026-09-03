@@ -65,7 +65,7 @@ export default function Footer() {
           <div className="footer-logo">
             {logoSrc ? (
               <img src={logoSrc} alt={`Logo ${namaSingkat}`}
-                style={{ width: 44, height: 44, objectFit: "contain" }} />
+                style={{ width: 44, height: 44, objectFit: "contain", borderRadius: "8px" }} />
             ) : (
               <div className="footer-logo-img">{inisial}</div>
             )}

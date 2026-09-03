@@ -146,7 +146,7 @@ export default function Navbar() {
               <img
                 src={logoSrc}
                 alt={`Logo ${namaSingkat}`}
-                style={{ width: 40, height: 40, objectFit: "contain" }}
+                style={{ width: 40, height: 40, objectFit: "contain", borderRadius: "8px" }}
               />
             ) : (
               <div className="nav-logo-img">{inisial}</div>
