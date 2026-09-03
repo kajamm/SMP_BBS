@@ -248,3 +248,22 @@ INSERT IGNORE INTO struktur_bagan (id, bagan_url, keterangan) VALUES (
     'Bagan Struktur Organisasi dan Tata Kerja SMP Plus Babussalam'
 );
 
+-- 16. Tugas dan Fungsi Wali Kelas
+CREATE TABLE IF NOT EXISTS wali_kelas_tugas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    judul VARCHAR(255) NOT NULL,
+    deskripsi TEXT NOT NULL,
+    urutan INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT IGNORE INTO wali_kelas_tugas (id, judul, deskripsi, urutan) VALUES
+    (1, 'Pengelolaan Kelas', 'Mengelola kelas yang menjadi tanggung jawabnya secara aktif dan berkesinambungan.', 1),
+    (2, 'Penyelenggaraan Administrasi', 'Menyelenggarakan administrasi kelas seperti denah tempat duduk, absensi, dan jadwal pelajaran.', 2),
+    (3, 'Penyusunan Statistik', 'Menyusun statistik bulanan kelas untuk memantau tingkat kehadiran dan partisipasi siswa.', 3),
+    (4, 'Pengisian Daftar Kumpulan Nilai', 'Mengisi daftar kumpulan nilai (legger) secara akurat berdasarkan laporan setiap guru mata pelajaran.', 4),
+    (5, 'Pembuatan Catatan Khusus', 'Membuat catatan khusus tentang siswa terkait perkembangan akademik maupun pembinaan karakter.', 5),
+    (6, 'Pencatatan Mutasi', 'Mencatat mutasi atau perpindahan siswa yang terjadi di dalam kelasnya selama tahun ajaran berjalan.', 6),
+    (7, 'Pelaporan Hasil Belajar', 'Mengisi dan membagikan buku laporan penilaian hasil belajar (rapor) kepada orang tua/wali murid.', 7);
+
+
