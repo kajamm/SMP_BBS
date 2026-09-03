@@ -173,7 +173,7 @@ VALUES (
     '(022) 250497',
     'babussalamdago@gmail.com',
     '6281234567890',
-    'Jl. Ciburial Indah Dago Atas Bandung, RT 1/RW 1, Kel. Ciburial, Kec. Cimenyan, Kab. Bandung, Jawa Barat 40198',
+    'Jalan Ciburial Indah, Dago Atas, RT 1/RW 1, Desa Ciburial, Kecamatan Cimenyan, Kabupaten Bandung, Jawa Barat 40198',
     '@smpplusbabussalam',
     'https://www.instagram.com/smpplusbabussalam/',
     'https://www.tiktok.com/@smpplusbabussalam',

@@ -52,4 +52,5 @@ INSERT INTO testimoni (name, title, quote, image) VALUES
 -- 5. Pengaturan sudah terisi otomatis melalui schema.sql sebelumnya
 -- Namun jika belum ada, ini perintahnya:
 INSERT IGNORE INTO pengaturan (id, telepon, email, whatsapp, alamat, instagram, instagramUrl, tiktokUrl, youtubeUrl, statsGuru, statsSiswa, statsKelas) 
-VALUES (1, '(022) 250497', 'info@smpplusbabussalam.sch.id', '6281234567890', 'Kawasan Pesantren Sains dan Teknologi Darul Hikam', '@smpbabussalam', 'https://instagram.com/smpbabussalam', 'https://tiktok.com/@smpbabussalam', 'https://youtube.com/@smpbabussalam', 15, 250, 12);
+VALUES (1, '(022) 250497', 'babussalamdago@gmail.com', '6281234567890', 'Jalan Ciburial Indah, Dago Atas, RT 1/RW 1, Desa Ciburial, Kecamatan Cimenyan, Kabupaten Bandung, Jawa Barat 40198', '@smpplusbabussalam', 'https://www.instagram.com/smpplusbabussalam/', 'https://www.tiktok.com/@smpplusbabussalam', 'https://www.youtube.com/@SmpPlusBabussalam', 30, 103, 6);
+

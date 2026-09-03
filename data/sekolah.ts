@@ -9,7 +9,7 @@ export const sekolah = {
   akreditasiSk: "SK No. 1347/BAN-SM/SK/2021",
   status: "Swasta, di bawah Yayasan Babussalam Al-Muchtariyah Pusat Bandung",
   alamat:
-    "Jl. Ciburial Indah Dago Atas Bandung, RT 1/RW 1, Kel. Ciburial, Kec. Cimenyan, Kab. Bandung, Jawa Barat 40198",
+    "Jalan Ciburial Indah, Dago Atas, RT 1/RW 1, Desa Ciburial, Kecamatan Cimenyan, Kabupaten Bandung, Jawa Barat 40198",
   email: "babussalamdago@gmail.com",
   telepon: "+62 812-3456-7890",
   whatsapp: "6281234567890",
