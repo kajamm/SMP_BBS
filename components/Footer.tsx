@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sekolah } from "@/data/sekolah";
@@ -19,6 +20,27 @@ export default function Footer() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
+  const [identitas, setIdentitas] = useState<{
+    logo_url?: string;
+    nama_singkat?: string;
+    inisial?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/identitas")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setIdentitas(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const logoSrc = (identitas?.logo_url && identitas.logo_url.trim()) || sekolah.logoUrl;
+  const namaSingkat = (identitas?.nama_singkat && identitas.nama_singkat.trim()) || sekolah.namaSingkat;
+  const inisial = (identitas?.inisial && identitas.inisial.trim()) || sekolah.inisial;
+
   return (
     <footer role="contentinfo">
       {/* CTA Banner */}
@@ -27,7 +49,7 @@ export default function Footer() {
           <div className="footer-cta-inner">
             <div className="footer-cta-text">
               <h3 className="footer-cta-heading">Bergabung Bersama Kami!</h3>
-              <p className="footer-cta-sub">Buka pintu masa depanmu di {sekolah.namaSingkat}</p>
+              <p className="footer-cta-sub">Buka pintu masa depanmu di {namaSingkat}</p>
             </div>
             <Link href="/daftar" className="footer-cta-btn">
               Daftar Sekarang
@@ -41,14 +63,14 @@ export default function Footer() {
         {/* Top Row: Logo + Sosmed */}
         <div className="footer-top-row">
           <div className="footer-logo">
-            {sekolah.logoUrl ? (
-              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`}
+            {logoSrc ? (
+              <img src={logoSrc} alt={`Logo ${namaSingkat}`}
                 style={{ width: 44, height: 44, objectFit: "contain" }} />
             ) : (
-              <div className="footer-logo-img">{sekolah.inisial}</div>
+              <div className="footer-logo-img">{inisial}</div>
             )}
             <div>
-              <div className="footer-logo-text">{sekolah.namaSingkat}</div>
+              <div className="footer-logo-text">{namaSingkat}</div>
               <div className="footer-logo-sub">Islamic Boarding School</div>
             </div>
           </div>
@@ -110,7 +132,7 @@ export default function Footer() {
         {/* Bottom: Copyright */}
         <div className="footer-bottom-row">
           <p>
-            {new Date().getFullYear()} &copy; {sekolah.namaSingkat}. Hak Cipta Dilindungi.
+            {new Date().getFullYear()} &copy; {namaSingkat}. Hak Cipta Dilindungi.
           </p>
         </div>
       </div>

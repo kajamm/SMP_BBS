@@ -59,6 +59,28 @@ export default function Navbar() {
     }
   }, []);
 
+  // Fetch identitas sekolah dari database
+  const [identitas, setIdentitas] = useState<{
+    logo_url?: string;
+    nama_singkat?: string;
+    inisial?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/identitas")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setIdentitas(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const logoSrc = (identitas?.logo_url && identitas.logo_url.trim()) || sekolah.logoUrl;
+  const namaSingkat = (identitas?.nama_singkat && identitas.nama_singkat.trim()) || sekolah.namaSingkat;
+  const inisial = (identitas?.inisial && identitas.inisial.trim()) || sekolah.inisial;
+
   // Scroll handler — on sub-pages, always stay "scrolled"
   useEffect(() => {
     if (!isHome) {
@@ -120,18 +142,18 @@ export default function Navbar() {
       >
         <div className="nav-container">
           <Link href="/" className="nav-logo">
-            {sekolah.logoUrl ? (
+            {logoSrc ? (
               <img
-                src={sekolah.logoUrl}
-                alt={`Logo ${sekolah.namaSingkat}`}
+                src={logoSrc}
+                alt={`Logo ${namaSingkat}`}
                 style={{ width: 40, height: 40, objectFit: "contain" }}
               />
             ) : (
-              <div className="nav-logo-img">{sekolah.inisial}</div>
+              <div className="nav-logo-img">{inisial}</div>
             )}
             <div>
               <div style={{ fontSize: "0.9375rem", fontWeight: 700, lineHeight: 1.2 }}>
-                {sekolah.namaSingkat}
+                {namaSingkat}
               </div>
             </div>
           </Link>
