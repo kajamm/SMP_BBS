@@ -19,7 +19,7 @@ export default function Profil() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    fetch("/api/identitas")
+    fetch("/api/identitas", { cache: "no-store" })
       .then((res) => res.json())
       .then((d) => setData(d))
       .catch(console.error);

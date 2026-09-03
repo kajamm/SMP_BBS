@@ -27,7 +27,7 @@ export default function Footer() {
   } | null>(null);
 
   useEffect(() => {
-    fetch("/api/identitas")
+    fetch("/api/identitas", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
         if (data && !data.error) {
