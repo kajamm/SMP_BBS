@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ImageUpload from "@/components/ImageUpload";
 
 interface GuruItem {
   id: number;
   nama: string;
   mapel: string;
+  foto?: string;
+  jabatan?: string;
+  pendidikan?: string;
 }
 
-const emptyForm = { nama: "", mapel: "" };
+const emptyForm = { nama: "", mapel: "", foto: "", jabatan: "", pendidikan: "" };
 
 export default function AdminGuru() {
   const [items, setItems] = useState<GuruItem[]>([]);
@@ -44,7 +48,13 @@ export default function AdminGuru() {
 
   const openEdit = (item: GuruItem) => {
     setEditingId(item.id);
-    setForm({ nama: item.nama, mapel: item.mapel });
+    setForm({ 
+      nama: item.nama, 
+      mapel: item.mapel,
+      foto: item.foto || "",
+      jabatan: item.jabatan || "",
+      pendidikan: item.pendidikan || ""
+    });
     setModalOpen(true);
   };
 
@@ -103,18 +113,29 @@ export default function AdminGuru() {
           <table className="admin-table">
             <thead>
               <tr>
-                <th style={{ width: 50 }}>No</th>
+                <th style={{ width: 60 }}>Foto</th>
                 <th>Nama Guru</th>
-                <th>Mata Pelajaran</th>
+                <th>Jabatan / Pelajaran</th>
                 <th style={{ width: 140 }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {items.map((item, idx) => (
+              {items.map((item) => (
                 <tr key={item.id}>
-                  <td>{idx + 1}</td>
-                  <td><strong>{item.nama}</strong></td>
-                  <td>{item.mapel}</td>
+                  <td>
+                    {item.foto
+                      ? <img src={item.foto} alt="" style={{ width: 44, height: 44, objectFit: "cover", borderRadius: 8 }} />
+                      : <div style={{ width: 44, height: 44, background: "#f3f4f6", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.3rem" }}>👤</div>
+                    }
+                  </td>
+                  <td>
+                    <strong>{item.nama}</strong>
+                    {item.pendidikan && <div style={{ fontSize: "0.8rem", color: "#6b7280", marginTop: 2 }}>{item.pendidikan}</div>}
+                  </td>
+                  <td>
+                    {item.jabatan && <div style={{ fontWeight: 600, color: "#111827", fontSize: "0.85rem" }}>{item.jabatan}</div>}
+                    <div style={{ color: "#6b7280", fontSize: "0.85rem" }}>{item.mapel}</div>
+                  </td>
                   <td>
                     <div className="admin-action-btns">
                       <button className="admin-btn admin-btn-sm admin-btn-secondary" onClick={() => openEdit(item)}>Edit</button>
@@ -141,9 +162,26 @@ export default function AdminGuru() {
                 <label>Nama Lengkap *</label>
                 <input type="text" value={form.nama} onChange={(e) => setForm({ ...form, nama: e.target.value })} placeholder="Contoh: H. Ahmad, S.Pd" />
               </div>
+              
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                <div className="admin-form-group">
+                  <label>Mata Pelajaran *</label>
+                  <input type="text" value={form.mapel} onChange={(e) => setForm({ ...form, mapel: e.target.value })} placeholder="Guru Matematika" />
+                </div>
+                <div className="admin-form-group">
+                  <label>Jabatan (Opsional)</label>
+                  <input type="text" value={form.jabatan} onChange={(e) => setForm({ ...form, jabatan: e.target.value })} placeholder="Wali Kelas 7A" />
+                </div>
+              </div>
+
               <div className="admin-form-group">
-                <label>Mata Pelajaran *</label>
-                <input type="text" value={form.mapel} onChange={(e) => setForm({ ...form, mapel: e.target.value })} placeholder="Contoh: Guru Matematika" />
+                <label>Pendidikan Terakhir (Opsional)</label>
+                <input type="text" value={form.pendidikan} onChange={(e) => setForm({ ...form, pendidikan: e.target.value })} placeholder="S1 Pendidikan Matematika UPI" />
+              </div>
+
+              <div className="admin-form-group">
+                <label>Foto (Opsional)</label>
+                <ImageUpload value={form.foto} onChange={(url) => setForm({ ...form, foto: url })} />
               </div>
             </div>
             <div className="admin-modal-footer">
@@ -173,4 +211,3 @@ export default function AdminGuru() {
     </div>
   );
 }
-

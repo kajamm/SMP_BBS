@@ -3,10 +3,10 @@ import db from "@/lib/db";
 
 export async function GET() {
   try {
-    const [rows] = await db.query("SELECT * FROM guru ORDER BY id ASC");
+    const [rows] = await db.query("SELECT * FROM prestasi ORDER BY tahun DESC, id DESC");
     return NextResponse.json(rows);
   } catch (error) {
-    console.error("Error fetching guru:", error);
+    console.error("Error fetching prestasi:", error);
     return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
   }
 }
@@ -14,20 +14,15 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { nama, mapel, foto, jabatan, pendidikan } = body;
-    
-    if (!nama || !mapel) {
-      return NextResponse.json({ error: "Nama dan Mapel harus diisi" }, { status: 400 });
-    }
-
+    const { nama, kategori, keterangan, tahun, foto } = body;
+    if (!nama) return NextResponse.json({ error: "Nama harus diisi" }, { status: 400 });
     const [result] = await db.query(
-      "INSERT INTO guru (nama, mapel, foto, jabatan, pendidikan) VALUES (?, ?, ?, ?, ?)",
-      [nama, mapel, foto || "", jabatan || "", pendidikan || ""]
+      "INSERT INTO prestasi (nama, kategori, keterangan, tahun, foto) VALUES (?, ?, ?, ?, ?)",
+      [nama, kategori || "siswa", keterangan || "", tahun || "", foto || ""]
     );
-    
     return NextResponse.json({ success: true, id: (result as any).insertId });
   } catch (error) {
-    console.error("Error adding guru:", error);
+    console.error("Error adding prestasi:", error);
     return NextResponse.json({ error: "Gagal menambah data" }, { status: 500 });
   }
 }
@@ -35,20 +30,15 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, nama, mapel, foto, jabatan, pendidikan } = body;
-    
-    if (!id || !nama || !mapel) {
-      return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
-    }
-
+    const { id, nama, kategori, keterangan, tahun, foto } = body;
+    if (!id || !nama) return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
     await db.query(
-      "UPDATE guru SET nama = ?, mapel = ?, foto = ?, jabatan = ?, pendidikan = ? WHERE id = ?",
-      [nama, mapel, foto || "", jabatan || "", pendidikan || "", id]
+      "UPDATE prestasi SET nama=?, kategori=?, keterangan=?, tahun=?, foto=? WHERE id=?",
+      [nama, kategori || "siswa", keterangan || "", tahun || "", foto || "", id]
     );
-    
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error updating guru:", error);
+    console.error("Error updating prestasi:", error);
     return NextResponse.json({ error: "Gagal mengupdate data" }, { status: 500 });
   }
 }
@@ -57,16 +47,11 @@ export async function DELETE(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
-    
-    if (!id) {
-      return NextResponse.json({ error: "ID harus disertakan" }, { status: 400 });
-    }
-
-    await db.query("DELETE FROM guru WHERE id = ?", [id]);
-    
+    if (!id) return NextResponse.json({ error: "ID harus disertakan" }, { status: 400 });
+    await db.query("DELETE FROM prestasi WHERE id=?", [id]);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error deleting guru:", error);
+    console.error("Error deleting prestasi:", error);
     return NextResponse.json({ error: "Gagal menghapus data" }, { status: 500 });
   }
 }

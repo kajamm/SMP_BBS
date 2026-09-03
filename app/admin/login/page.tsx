@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { login, isAuthenticated } from "@/lib/auth";
+import { isAuthenticated } from "@/lib/auth";
 import { useEffect } from "react";
 
 export default function AdminLoginPage() {
@@ -17,19 +17,30 @@ export default function AdminLoginPage() {
     }
   }, [router]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    setTimeout(() => {
-      if (login(password)) {
+    try {
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "login", password }),
+      });
+
+      if (res.ok) {
+        localStorage.setItem("smp_bbs_admin_auth", "authenticated");
         router.replace("/admin");
       } else {
-        setError("Password salah. Silakan coba lagi.");
+        const data = await res.json();
+        setError(data.error || "Password salah. Silakan coba lagi.");
         setLoading(false);
       }
-    }, 500);
+    } catch (err) {
+      setError("Terjadi kesalahan. Silakan coba lagi.");
+      setLoading(false);
+    }
   };
 
   return (

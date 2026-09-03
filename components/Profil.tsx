@@ -1,4 +1,6 @@
-import { sekolah } from "@/data/sekolah";
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   IconBuilding,
   IconAward,
@@ -8,29 +10,38 @@ import {
   IconGrid,
   IconMapPin,
   IconMail,
-  IconPhoneCall,
   IconGlobe,
   IconCalendar,
   IconInstagram,
 } from "./icons";
 
-const items = [
-  { icon: <IconSchool />, label: "Nama Sekolah", value: sekolah.namaLengkap },
-  { icon: <IconCheckCircle />, label: "Status Sekolah", value: sekolah.status },
-  { icon: <IconGrid />, label: "NPSN", value: sekolah.npsn },
-  {
-    icon: <IconAward />,
-    label: "Akreditasi",
-    value: `${sekolah.akreditasi} — ${sekolah.akreditasiSk}`,
-  },
-  { icon: <IconMapPin />, label: "Alamat Lengkap", value: sekolah.alamat, full: true },
-  { icon: <IconMail />, label: "Email", value: sekolah.email },
-  { icon: <IconInstagram />, label: "Instagram", value: sekolah.instagram, href: sekolah.instagramUrl },
-  { icon: <IconGlobe />, label: "Website", value: sekolah.website },
-  { icon: <IconCalendar />, label: "SK Pendirian", value: sekolah.skPendirian },
-];
-
 export default function Profil() {
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/api/identitas")
+      .then((res) => res.json())
+      .then((d) => setData(d))
+      .catch(console.error);
+  }, []);
+
+  if (!data) return null;
+
+  const items = [
+    { icon: <IconSchool />, label: "Nama Sekolah", value: data.nama_lengkap },
+    { icon: <IconCheckCircle />, label: "Status Sekolah", value: data.status_sekolah },
+    { icon: <IconGrid />, label: "NPSN", value: data.npsn },
+    {
+      icon: <IconAward />,
+      label: "Akreditasi",
+      value: `${data.akreditasi} — ${data.akreditasi_sk}`,
+    },
+    // We didn't add alamat to identitas schema, so let's skip or hardcode
+    // { icon: <IconMapPin />, label: "Alamat Lengkap", value: "Jl. Babakan Nusantara...", full: true },
+    { icon: <IconGlobe />, label: "Website", value: data.website },
+    { icon: <IconCalendar />, label: "SK Pendirian", value: data.sk_pendirian },
+  ];
+
   return (
     <section id="profil" aria-label="Profil Sekolah">
       <div className="section-container">
@@ -41,26 +52,26 @@ export default function Profil() {
           </div>
           <h2 className="section-title">Identitas Sekolah</h2>
           <p className="section-subtitle">
-            Informasi lengkap mengenai {sekolah.namaSingkat} sebagai lembaga pendidikan formal
+            Informasi lengkap mengenai {data.nama_singkat} sebagai lembaga pendidikan formal
             tingkat menengah pertama.
           </p>
         </div>
 
         <div className="profil-grid">
           <div className="profil-logo-card fade-in-left">
-            {sekolah.logoUrl ? (
-              <img src={sekolah.logoUrl} alt={`Logo ${sekolah.namaSingkat}`} style={{ width: 120, height: 120, objectFit: "contain", marginBottom: "1rem" }} />
+            {data.logo_url ? (
+              <img src={data.logo_url} alt={`Logo ${data.nama_singkat}`} style={{ width: 120, height: 120, objectFit: "contain", marginBottom: "1rem" }} />
             ) : (
-              <div className="profil-logo-wrapper">{sekolah.inisial}</div>
+              <div className="profil-logo-wrapper">{data.inisial}</div>
             )}
-            <h3 className="profil-school-name">{sekolah.namaSingkat}</h3>
+            <h3 className="profil-school-name">{data.nama_singkat}</h3>
             <p className="profil-school-sub">
               Sekolah Menengah Pertama
               <br />
             </p>
             <div className="profil-akreditasi-badge">
               <IconAward width={14} height={14} />
-              Akreditasi {sekolah.akreditasi}
+              Akreditasi {data.akreditasi}
             </div>
             <div
               style={{
@@ -81,7 +92,7 @@ export default function Profil() {
                   letterSpacing: "0.08em",
                 }}
               >
-                {sekolah.npsn}
+                {data.npsn}
               </div>
             </div>
           </div>
@@ -96,14 +107,14 @@ export default function Profil() {
               {items.map((item) => (
                 <div
                   className="profil-info-item"
-                  style={item.full ? { gridColumn: "1/-1" } : undefined}
+                  style={(item as any).full ? { gridColumn: "1/-1" } : undefined}
                   key={item.label}
                 >
                   <div className="profil-info-icon">{item.icon}</div>
                   <div>
                     <div className="profil-info-label">{item.label}</div>
-                    {item.href ? (
-                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="profil-info-value" style={{ textDecoration: "none", color: "var(--primary)" }}>
+                    {(item as any).href ? (
+                      <a href={(item as any).href} target="_blank" rel="noopener noreferrer" className="profil-info-value" style={{ textDecoration: "none", color: "var(--primary)" }}>
                         {item.value}
                       </a>
                     ) : (

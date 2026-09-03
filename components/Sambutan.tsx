@@ -2,12 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Sambutan() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
+    fetch("/api/sambutan")
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(console.error);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,33 +28,32 @@ export default function Sambutan() {
     return () => observer.disconnect();
   }, []);
 
+  if (!data) return null;
+
   return (
     <section id="sambutan" className="section-container" style={{ padding: "80px 24px" }} ref={sectionRef}>
       <div className="sambutan-grid fade-in-up">
         {/* Left Side: Image */}
         <div className="sambutan-image-wrapper">
-          <Image
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop"
-            alt="H. Andi Rustandi, S.S"
-            width={400}
-            height={500}
-            className="sambutan-image"
-          />
+          {data.foto && (
+            <Image
+              src={data.foto}
+              alt={data.nama}
+              width={400}
+              height={500}
+              className="sambutan-image"
+              unoptimized
+            />
+          )}
         </div>
 
         {/* Right Side: Content */}
         <div className="sambutan-content">
-          <h2 className="sambutan-title">H. Andi Rustandi, S.S</h2>
-          <h3 className="sambutan-subtitle">Mudir Ma&apos;had Pesantren Sains &amp; Teknologi Babussalam</h3>
+          <h2 className="sambutan-title">{data.nama}</h2>
+          <h3 className="sambutan-subtitle">{data.jabatan}</h3>
           
-          <div className="sambutan-text">
-            <p className="sambutan-greeting">Assalamu&apos;alaikum Warrohmatullohi WabaroKatuh</p>
-            <p>
-              Selamat datang di website resmi SMP Plus Babussalam, media informasi dan komunikasi yang kami hadirkan untuk memperkenalkan program, kegiatan, serta perkembangan pesantren. 
-            </p>
-            <p>
-              Kami berkomitmen menyelenggarakan pendidikan Islam terpadu yang terintegrasikan nilai keislaman, sains, dan teknologi guna membentuk generasi yang beriman, berakhlak mulia, berilmu, dan siap menghadapi tantangan zaman.
-            </p>
+          <div className="sambutan-text" style={{ whiteSpace: "pre-wrap" }}>
+            {data.teks}
           </div>
 
           <Link href="/profil" className="btn-primary" style={{ display: "inline-flex", marginTop: "40px" }}>
