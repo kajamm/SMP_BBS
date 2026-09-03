@@ -47,13 +47,35 @@ export default function Kontak() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (!form.nama.trim() || !form.pesan.trim()) {
+      alert("Mohon lengkapi Nama dan Pesan Anda.");
+      return;
+    }
+
     setSending(true);
+
+    let cleanWa = whatsapp.replace(/[^0-9]/g, "");
+    if (cleanWa.startsWith("0")) cleanWa = "62" + cleanWa.slice(1);
+    if (!cleanWa) cleanWa = "6281234567890";
+
+    const waText = `Halo Admin SMP Plus Babussalam, saya ingin mengirim pesan melalui website:
+
+*Nama:* ${form.nama.trim()}
+*Email:* ${form.email.trim() || "-"}
+*Subjek / Perihal:* ${form.subjek.trim() || "Pertanyaan Umum"}
+
+*Isi Pesan:*
+${form.pesan.trim()}`;
+
+    const waUrl = `https://wa.me/${cleanWa}?text=${encodeURIComponent(waText)}`;
+
     setTimeout(() => {
       setSending(false);
+      window.open(waUrl, "_blank");
       setForm({ nama: "", email: "", subjek: "", pesan: "" });
       setShowSuccess(true);
-      setTimeout(() => setShowSuccess(false), 5000);
-    }, 1500);
+      setTimeout(() => setShowSuccess(false), 7000);
+    }, 600);
   };
 
   return (
@@ -271,12 +293,12 @@ export default function Kontak() {
                       >
                         <path d="M21 12a9 9 0 1 1-6.219-8.56" />
                       </svg>
-                      Mengirim...
+                      Menghubungkan ke WhatsApp...
                     </>
                   ) : (
                     <>
                       <IconSend />
-                      Kirim Pesan
+                      Kirim Pesan via WhatsApp
                     </>
                   )}
                 </button>
@@ -284,10 +306,9 @@ export default function Kontak() {
 
               <div id="form-success" className={`form-success ${showSuccess ? "show" : ""}`} role="alert">
                 <IconCheckCircle2 />
-                <p className="form-success-title">Pesan Berhasil Terkirim!</p>
+                <p className="form-success-title">Membuka WhatsApp Admin...</p>
                 <p className="form-success-text">
-                  Terima kasih telah menghubungi kami. Kami akan segera merespons pesan Anda dalam
-                  1x24 jam kerja.
+                  Pesan Anda telah disiapkan. Anda sedang dialihkan langsung ke obrolan WhatsApp Admin SMP Plus Babussalam.
                 </p>
               </div>
             </div>
