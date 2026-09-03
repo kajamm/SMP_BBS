@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import ImageUpload from "@/components/ImageUpload";
 
 interface PrestasiItem { id: number; nama: string; kategori: "siswa" | "sekolah"; keterangan: string; tahun: string; foto: string; }
-const emptyForm = { nama: "", kategori: "siswa" as const, keterangan: "", tahun: "", foto: "" };
+const emptyForm: { nama: string; kategori: "siswa" | "sekolah"; keterangan: string; tahun: string; foto: string } = {
+  nama: "",
+  kategori: "siswa",
+  keterangan: "",
+  tahun: "",
+  foto: "",
+};
 
 export default function AdminPrestasi() {
   const [items, setItems] = useState<PrestasiItem[]>([]);
