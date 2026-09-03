@@ -103,13 +103,13 @@ export default function AdminTestimoni() {
         <div className="admin-empty">Belum ada testimoni. Klik &quot;Tambah Testimoni&quot; untuk memulai.</div>
       ) : (
         <div className="admin-table-wrapper">
-          <table className="admin-table">
+          <table className="admin-table" style={{ minWidth: 620 }}>
             <thead>
               <tr>
                 <th style={{ width: 60 }}>Foto</th>
-                <th>Nama</th>
-                <th>Prestasi / Jabatan</th>
-                <th>Quote</th>
+                <th style={{ minWidth: 120 }}>Nama</th>
+                <th style={{ minWidth: 140 }}>Prestasi / Jabatan</th>
+                <th style={{ minWidth: 160 }} className="admin-col-quote">Quote</th>
                 <th style={{ width: 140 }}>Aksi</th>
               </tr>
             </thead>
@@ -117,11 +117,24 @@ export default function AdminTestimoni() {
               {items.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <img src={item.image || "https://placehold.co/150"} alt="" className="admin-table-avatar" />
+                    <img src={item.image || "https://placehold.co/150"} alt={item.name} className="admin-table-avatar" />
                   </td>
                   <td><strong>{item.name}</strong></td>
                   <td style={{ fontSize: "0.85rem", color: "#6b7280" }}>{item.title}</td>
-                  <td style={{ fontSize: "0.85rem", fontStyle: "italic" }}>&quot;{item.quote}&quot;</td>
+                  <td
+                    className="admin-col-quote"
+                    style={{
+                      fontSize: "0.85rem",
+                      fontStyle: "italic",
+                      maxWidth: 200,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                    title={item.quote}
+                  >
+                    &quot;{item.quote}&quot;
+                  </td>
                   <td>
                     <div className="admin-action-btns">
                       <button className="admin-btn admin-btn-sm admin-btn-secondary" onClick={() => openEdit(item)}>Edit</button>

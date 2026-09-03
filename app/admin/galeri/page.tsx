@@ -108,9 +108,9 @@ export default function AdminGaleri() {
               </div>
               <div className="admin-gallery-card-body">
                 <p className="admin-gallery-caption">{item.caption || "Tanpa caption"}</p>
-                <div className="admin-action-btns">
-                  <button className="admin-btn admin-btn-sm admin-btn-secondary" onClick={() => openEdit(item)}>Edit</button>
-                  <button className="admin-btn admin-btn-sm admin-btn-danger" onClick={() => setDeleteConfirm(item.id)}>Hapus</button>
+                <div className="admin-action-btns" style={{ flexWrap: "wrap" }}>
+                  <button className="admin-btn admin-btn-sm admin-btn-secondary" style={{ flex: 1 }} onClick={() => openEdit(item)}>Edit</button>
+                  <button className="admin-btn admin-btn-sm admin-btn-danger" style={{ flex: 1 }} onClick={() => setDeleteConfirm(item.id)}>Hapus</button>
                 </div>
               </div>
             </div>

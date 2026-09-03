@@ -134,8 +134,12 @@ export default function AdminPengaturan() {
           </div>
         </div>
 
-        <div className="admin-settings-actions">
-          {saved && <span className="admin-alert admin-alert-success">✅ Pengaturan berhasil disimpan!</span>}
+        <div className="admin-settings-actions" style={{ flexDirection: "column", alignItems: "flex-end" }}>
+          {saved && (
+            <span className="admin-alert admin-alert-success" style={{ marginBottom: 0, alignSelf: "stretch", textAlign: "center" }}>
+              ✅ Pengaturan berhasil disimpan!
+            </span>
+          )}
           <button type="submit" className="admin-btn admin-btn-primary">Simpan Pengaturan</button>
         </div>
       </form>

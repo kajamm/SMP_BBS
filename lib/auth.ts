@@ -1,5 +1,5 @@
 const AUTH_KEY = "smp_bbs_admin_auth";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 
 export function login(password: string): boolean {
   if (password === ADMIN_PASSWORD) {

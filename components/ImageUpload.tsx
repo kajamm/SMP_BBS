@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useId } from "react";
 
 interface ImageUploadProps {
   value: string;
@@ -10,6 +10,9 @@ interface ImageUploadProps {
 export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // ID unik per instance — mencegah konflik jika komponen dipakai lebih dari 1x di halaman yang sama
+  const uniqueId = useId();
+  const inputId = `file-upload-input-${uniqueId.replace(/:/g, "")}`;
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -44,14 +47,15 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "10px" }}>
+      <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "10px", flexWrap: "wrap" }}>
         <input 
           type="text" 
           value={value} 
           onChange={(e) => onChange(e.target.value)} 
           placeholder="https://... atau upload file"
           style={{ 
-            flex: 1, 
+            flex: "1 1 180px",
+            minWidth: 0,
             padding: "10px 14px", 
             borderRadius: "10px", 
             border: "1px solid #d1d5db",
@@ -64,22 +68,30 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
           ref={fileInputRef}
           onChange={handleUpload}
           style={{ display: "none" }}
-          id="file-upload-input"
+          id={inputId}
         />
         <label 
-          htmlFor="file-upload-input"
+          htmlFor={inputId}
           className="admin-btn admin-btn-secondary"
           style={{ 
             cursor: uploading ? "not-allowed" : "pointer", 
             opacity: uploading ? 0.7 : 1,
             margin: 0,
-            whiteSpace: "nowrap"
+            whiteSpace: "nowrap",
+            flexShrink: 0,
           }}
         >
           {uploading ? "⏳ Uploading..." : "📁 Pilih File"}
         </label>
       </div>
-      {value && <img src={value} alt="Preview" className="admin-img-preview" style={{ maxWidth: "200px", borderRadius: "8px", border: "1px solid #e5e7eb" }} />}
+      {value && (
+        <img
+          src={value}
+          alt="Preview"
+          className="admin-img-preview"
+          style={{ maxWidth: "200px", borderRadius: "8px", border: "1px solid #e5e7eb" }}
+        />
+      )}
     </div>
   );
 }

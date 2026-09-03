@@ -4211,6 +4211,11 @@ h2 {
   background: #f9fafb;
 }
 
+/* Kolom yang disembunyikan di mobile (misal: Quote di tabel Testimoni) */
+.admin-col-quote {
+  display: table-cell;
+}
+
 .admin-table-img {
   width: 48px;
   height: 36px;
@@ -4538,6 +4543,11 @@ h2 {
 
   .admin-table {
     min-width: 500px;
+  }
+
+  /* Sembunyikan kolom Quote di mobile agar tabel tidak melar */
+  .admin-col-quote {
+    display: none;
   }
 
   .admin-gallery-grid {

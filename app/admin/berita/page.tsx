@@ -106,7 +106,7 @@ export default function AdminBerita() {
           <table className="admin-table">
             <thead>
               <tr>
-                <th style={{ width: 60 }}>Gambar</th>
+                <th style={{ width: 80 }}>Gambar</th>
                 <th>Judul</th>
                 <th style={{ width: 120 }}>Tanggal</th>
                 <th style={{ width: 140 }}>Aksi</th>
@@ -116,7 +116,7 @@ export default function AdminBerita() {
               {items.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <img src={item.image || "https://placehold.co/150"} alt="" className="admin-table-img" />
+                    <img src={item.image || "https://placehold.co/150"} alt={item.title} className="admin-table-img" style={{ width: 64, height: 48 }} />
                   </td>
                   <td>
                     <strong>{item.title}</strong>
