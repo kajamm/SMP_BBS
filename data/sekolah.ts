@@ -2,7 +2,7 @@ export const sekolah = {
   namaSingkat: "SMP PLUS BABUSSALAM",
   namaLengkap: "SMP PLUS BABUSSALAM",
   inisial: "BBS",
-  logoUrl: "https://ui-avatars.com/api/?name=BBS&background=007A43&color=fff&rounded=true&bold=true", // Placeholder dummy logo
+  logoUrl: "https://ui-avatars.com/api/?name=B+B+S&background=007A43&color=fff&rounded=true&bold=true&length=3", // Placeholder dummy logo
   motto: "Cerdas, Berkarakter, dan Berdaya Saing Global",
   npsn: "20252483",
   akreditasi: "A",
@@ -30,7 +30,7 @@ export const sekolah = {
     { hari: "Senin - Jumat", waktu: "07.00 - 14.00 WIB" },
     { hari: "Sabtu", waktu: "07.00 - 12.00 WIB" },
     { hari: "TU & Administrasi", waktu: "08.00 - 15.00 WIB" },
-    { hari: "Minggu & Libur", waktu: "Tutup" },
+    { hari: "Ahad & Libur", waktu: "Tutup" },
   ],
   rekening: {
     bank: "Bank BSI unit Dago",
