@@ -10,6 +10,23 @@ interface BeritaItem {
   excerpt: string;
 }
 
+function formatBeritaDate(dStr: string) {
+  if (!dStr) return "";
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dStr)) {
+    const [d, m, y] = dStr.split("/");
+    const parsed = new Date(Number(y), Number(m) - 1, Number(d));
+    if (!isNaN(parsed.getTime())) {
+      return parsed.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    }
+    return dStr;
+  }
+  const parsed = new Date(dStr);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+  }
+  return dStr;
+}
+
 export default async function Berita() {
   let beritaList: BeritaItem[] = [];
   
@@ -40,7 +57,7 @@ export default async function Berita() {
             <div className="berita-content">
               <div className="berita-date">
                 <IconClock width={14} height={14} />
-                {berita.date}
+                {formatBeritaDate(berita.date)}
               </div>
               <h3 className="berita-title">{berita.title}</h3>
               <p className="berita-excerpt">{berita.excerpt}</p>

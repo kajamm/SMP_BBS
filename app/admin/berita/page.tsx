@@ -11,6 +11,37 @@ interface BeritaItem {
   excerpt: string;
 }
 
+const toInputDate = (dStr: string) => {
+  if (!dStr) return new Date().toISOString().split("T")[0];
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dStr)) return dStr;
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dStr)) {
+    const [d, m, y] = dStr.split("/");
+    return `${y}-${m.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  }
+  const parsed = new Date(dStr);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.toISOString().split("T")[0];
+  }
+  return new Date().toISOString().split("T")[0];
+};
+
+const formatDisplayDate = (dStr: string) => {
+  if (!dStr) return "-";
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dStr)) {
+    const [d, m, y] = dStr.split("/");
+    const parsed = new Date(Number(y), Number(m) - 1, Number(d));
+    if (!isNaN(parsed.getTime())) {
+      return parsed.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+    }
+    return dStr;
+  }
+  const parsed = new Date(dStr);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+  }
+  return dStr;
+};
+
 const emptyForm = { title: "", date: "", image: "", excerpt: "" };
 
 export default function AdminBerita() {
@@ -41,13 +72,21 @@ export default function AdminBerita() {
 
   const openAdd = () => {
     setEditingId(null);
-    setForm(emptyForm);
+    setForm({
+      ...emptyForm,
+      date: new Date().toISOString().split("T")[0],
+    });
     setModalOpen(true);
   };
 
   const openEdit = (item: BeritaItem) => {
     setEditingId(item.id);
-    setForm({ title: item.title, date: item.date, image: item.image, excerpt: item.excerpt });
+    setForm({
+      title: item.title,
+      date: toInputDate(item.date),
+      image: item.image,
+      excerpt: item.excerpt,
+    });
     setModalOpen(true);
   };
 
@@ -123,7 +162,7 @@ export default function AdminBerita() {
                     <br />
                     <small style={{ color: "#6b7280" }}>{item.excerpt?.substring(0, 60)}...</small>
                   </td>
-                  <td>{item.date}</td>
+                  <td>{formatDisplayDate(item.date)}</td>
                   <td>
                     <div className="admin-action-btns">
                       <button className="admin-btn admin-btn-sm admin-btn-secondary" onClick={() => openEdit(item)}>Edit</button>
@@ -151,8 +190,12 @@ export default function AdminBerita() {
                 <input type="text" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="Masukkan judul berita" />
               </div>
               <div className="admin-form-group">
-                <label>Tanggal</label>
-                <input type="text" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} placeholder="Contoh: 28/11/2025" />
+                <label>Tanggal Berita *</label>
+                <input
+                  type="date"
+                  value={form.date}
+                  onChange={(e) => setForm({ ...form, date: e.target.value })}
+                />
               </div>
               <div className="admin-form-group">
                 <label>Gambar</label>
