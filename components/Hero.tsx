@@ -182,7 +182,7 @@ export default function Hero() {
           </div>
           <div className="hero-stat-divider"></div>
           <div className="hero-stat-item">
-            <div className="hero-stat-num"><Counter target={1983} /></div>
+            <div className="hero-stat-num"><Counter target={1983} useSeparator={false} /></div>
             <div className="hero-stat-lbl">
               <IconCalendar width={13} height={13} />
               Tahun Berdiri

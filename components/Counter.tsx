@@ -6,10 +6,12 @@ export default function Counter({
   target,
   suffix = "",
   duration = 2000,
+  useSeparator = true,
 }: {
   target: number;
   suffix?: string;
   duration?: number;
+  useSeparator?: boolean;
 }) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -48,7 +50,7 @@ export default function Counter({
 
   return (
     <span className="counter" ref={ref}>
-      {value.toLocaleString("id-ID")}
+      {useSeparator ? value.toLocaleString("id-ID") : value}
       {suffix}
     </span>
   );
