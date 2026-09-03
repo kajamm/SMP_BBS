@@ -223,3 +223,28 @@ INSERT IGNORE INTO ppdb (id, tahun_ajaran, syarat, info_biaya, catatan, is_open)
     'Pendaftaran dibuka setiap tahun. Kuota terbatas.',
     0
 );
+
+-- 15. Struktur Organisasi
+CREATE TABLE IF NOT EXISTS struktur_bagan (
+    id INT PRIMARY KEY DEFAULT 1,
+    bagan_url TEXT,
+    keterangan TEXT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS struktur_organisasi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    jabatan VARCHAR(255) NOT NULL,
+    kategori VARCHAR(100) DEFAULT 'Pimpinan Utama',
+    urutan INT DEFAULT 0,
+    foto TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT IGNORE INTO struktur_bagan (id, bagan_url, keterangan) VALUES (
+    1,
+    '',
+    'Bagan Struktur Organisasi dan Tata Kerja SMP Plus Babussalam'
+);
+
