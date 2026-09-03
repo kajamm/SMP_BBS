@@ -9,7 +9,7 @@ export default function Sejarah() {
   const [items, setItems] = useState<SejarahItem[]>([]);
 
   useEffect(() => {
-    fetch("/api/sejarah")
+    fetch("/api/sejarah", { cache: "no-store" })
       .then(res => res.json())
       .then(d => {
         if (Array.isArray(d)) setItems(d);

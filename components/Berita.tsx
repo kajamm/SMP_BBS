@@ -1,6 +1,7 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 import { IconClock } from "./icons";
-import db from "@/lib/db";
 
 interface BeritaItem {
   id: number;
@@ -27,17 +28,23 @@ function formatBeritaDate(dStr: string) {
   return dStr;
 }
 
-export default async function Berita() {
-  let beritaList: BeritaItem[] = [];
-  
-  try {
-    const [rows] = await db.query("SELECT * FROM berita ORDER BY id DESC LIMIT 6");
-    beritaList = rows as BeritaItem[];
-  } catch (error) {
-    console.error("Error fetching berita for public:", error);
-  }
+export default function Berita() {
+  const [beritaList, setBeritaList] = useState<BeritaItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (beritaList.length === 0) return null;
+  useEffect(() => {
+    fetch("/api/berita", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setBeritaList(data.slice(0, 6));
+        }
+      })
+      .catch((err) => console.error("Error fetching berita for public:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading || beritaList.length === 0) return null;
 
   return (
     <section id="berita" className="section-container" style={{ padding: "80px 24px" }}>
@@ -52,7 +59,12 @@ export default async function Berita() {
         {beritaList.map((berita) => (
           <div key={berita.id} className="berita-card fade-in-up">
             <div className="berita-image-wrapper">
-              <Image src={berita.image || "https://placehold.co/400x300"} alt={berita.title} fill className="berita-image" />
+              <img
+                src={berita.image || "https://placehold.co/400x300"}
+                alt={berita.title}
+                className="berita-image"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
             </div>
             <div className="berita-content">
               <div className="berita-date">

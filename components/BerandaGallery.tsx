@@ -10,7 +10,16 @@ export default function BerandaGallery() {
   const [galleryData, setGalleryData] = useState<GalleryPhoto[]>([]);
 
   useEffect(() => {
-    setGalleryData(getGaleri().slice(0, 8));
+    fetch("/api/galeri", { cache: "no-store" })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setGalleryData(data.slice(0, 8));
+        } else {
+          setGalleryData(getGaleri().slice(0, 8));
+        }
+      })
+      .catch(() => setGalleryData(getGaleri().slice(0, 8)));
   }, []);
 
   if (galleryData.length === 0) return null;

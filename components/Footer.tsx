@@ -26,6 +26,16 @@ export default function Footer() {
     inisial?: string;
   } | null>(null);
 
+  const [pengaturan, setPengaturan] = useState<{
+    telepon?: string;
+    email?: string;
+    whatsapp?: string;
+    alamat?: string;
+    instagramUrl?: string;
+    tiktokUrl?: string;
+    youtubeUrl?: string;
+  } | null>(null);
+
   useEffect(() => {
     fetch("/api/identitas", { cache: "no-store" })
       .then((res) => res.json())
@@ -35,11 +45,28 @@ export default function Footer() {
         }
       })
       .catch(() => {});
+
+    fetch("/api/pengaturan", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setPengaturan(data);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const logoSrc = (identitas?.logo_url && identitas.logo_url.trim()) || sekolah.logoUrl;
   const namaSingkat = (identitas?.nama_singkat && identitas.nama_singkat.trim()) || sekolah.namaSingkat;
   const inisial = (identitas?.inisial && identitas.inisial.trim()) || sekolah.inisial;
+
+  const instagramUrl = (pengaturan?.instagramUrl && pengaturan.instagramUrl.trim()) || sekolah.instagramUrl;
+  const tiktokUrl = (pengaturan?.tiktokUrl && pengaturan.tiktokUrl.trim()) || sekolah.tiktokUrl;
+  const youtubeUrl = (pengaturan?.youtubeUrl && pengaturan.youtubeUrl.trim()) || sekolah.youtubeUrl;
+  const alamat = (pengaturan?.alamat && pengaturan.alamat.trim()) || sekolah.alamat;
+  const email = (pengaturan?.email && pengaturan.email.trim()) || sekolah.email;
+  const telepon = (pengaturan?.telepon && pengaturan.telepon.trim()) || sekolah.telepon;
+  const whatsapp = (pengaturan?.whatsapp && pengaturan.whatsapp.trim()) || sekolah.whatsapp;
 
   return (
     <footer role="contentinfo">
@@ -76,13 +103,13 @@ export default function Footer() {
           </div>
 
           <div className="footer-sosmed">
-            <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="Instagram">
+            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="Instagram">
               <IconInstagram />
             </a>
-            <a href={sekolah.tiktokUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="TikTok">
+            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="TikTok">
               <IconTiktok />
             </a>
-            <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="YouTube">
+            <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="footer-sosmed-btn" aria-label="YouTube">
               <IconYoutube />
             </a>
           </div>
@@ -98,7 +125,7 @@ export default function Footer() {
             </div>
             <div>
               <div className="footer-contact-label">Address</div>
-              <div className="footer-contact-value">{sekolah.alamat}</div>
+              <div className="footer-contact-value">{alamat}</div>
             </div>
           </div>
 
@@ -108,8 +135,8 @@ export default function Footer() {
             </div>
             <div>
               <div className="footer-contact-label">E-Mail</div>
-              <a href={`mailto:${sekolah.email}`} className="footer-contact-value footer-contact-link">
-                {sekolah.email}
+              <a href={`mailto:${email}`} className="footer-contact-value footer-contact-link">
+                {email}
               </a>
             </div>
           </div>
@@ -120,8 +147,8 @@ export default function Footer() {
             </div>
             <div>
               <div className="footer-contact-label">Contact</div>
-              <a href={`https://wa.me/${sekolah.whatsapp}`} target="_blank" rel="noopener noreferrer" className="footer-contact-value footer-contact-link">
-                {sekolah.telepon}
+              <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="footer-contact-value footer-contact-link">
+                {telepon}
               </a>
             </div>
           </div>

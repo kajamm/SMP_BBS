@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import VisiMisi from "@/components/VisiMisi";
 import ScrollReveal from "@/components/ScrollReveal";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Visi & Misi | SMP Plus Babussalam",
   description:

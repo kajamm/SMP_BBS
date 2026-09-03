@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { sekolah } from "@/data/sekolah";
 import Counter from "./Counter";
 import {
@@ -10,6 +11,16 @@ import {
 } from "./icons";
 
 export default function Hero() {
+  const [stats, setStats] = useState<{ statsGuru?: number; statsSiswa?: number; statsKelas?: number }>({});
+
+  useEffect(() => {
+    fetch("/api/pengaturan", { cache: "no-store" })
+      .then(res => res.json())
+      .then(data => {
+        if (data && !data.error) setStats(data);
+      })
+      .catch(() => {});
+  }, []);
   return (
     <section id="home" aria-label="Beranda">
       <div className="hero-bg"></div>
@@ -158,7 +169,7 @@ export default function Hero() {
         {/* Stats Strip at bottom */}
         <div className="hero-stats-strip">
           <div className="hero-stat-item">
-            <div className="hero-stat-num"><Counter target={30} suffix="+" /></div>
+            <div className="hero-stat-num"><Counter target={stats.statsGuru !== undefined && stats.statsGuru > 0 ? stats.statsGuru : 30} suffix="+" /></div>
             <div className="hero-stat-lbl">
               <IconUsers width={13} height={13} />
               Guru &amp; Staff
@@ -166,7 +177,7 @@ export default function Hero() {
           </div>
           <div className="hero-stat-divider"></div>
           <div className="hero-stat-item">
-            <div className="hero-stat-num"><Counter target={103} suffix="+" /></div>
+            <div className="hero-stat-num"><Counter target={stats.statsSiswa !== undefined && stats.statsSiswa > 0 ? stats.statsSiswa : 103} suffix="+" /></div>
             <div className="hero-stat-lbl">
               <IconGraduation width={13} height={13} />
               Siswa Aktif
@@ -174,7 +185,7 @@ export default function Hero() {
           </div>
           <div className="hero-stat-divider"></div>
           <div className="hero-stat-item">
-            <div className="hero-stat-num"><Counter target={6} /></div>
+            <div className="hero-stat-num"><Counter target={stats.statsKelas !== undefined && stats.statsKelas > 0 ? stats.statsKelas : 6} /></div>
             <div className="hero-stat-lbl">
               <IconBuilding width={13} height={13} />
               Kelas

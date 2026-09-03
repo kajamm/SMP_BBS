@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { sekolah } from "@/data/sekolah";
 import { IconCheckCircle2, IconSend } from "./icons";
 
 export default function Daftar() {
+  const [ppdbInfo, setPpdbInfo] = useState<any>(null);
+  const [adminWA, setAdminWA] = useState("6281234567890");
+
   const [form, setForm] = useState({
     namaSiswa: "",
     nisn: "",
@@ -15,6 +18,22 @@ export default function Daftar() {
     email: "",
   });
 
+  useEffect(() => {
+    fetch("/api/ppdb", { cache: "no-store" })
+      .then(res => res.json())
+      .then(d => { if (d && !d.error) setPpdbInfo(d); })
+      .catch(() => {});
+
+    fetch("/api/pengaturan", { cache: "no-store" })
+      .then(res => res.json())
+      .then(d => {
+        if (d && d.whatsapp) {
+          setAdminWA(d.whatsapp.replace(/[^0-9]/g, ""));
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const handleChange =
     (field: keyof typeof form) =>
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,9 +42,6 @@ export default function Daftar() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    
-    // Nomor WhatsApp tujuan (ganti dengan nomor asli PPDB sekolah)
-    const adminWA = "6281234567890"; 
     
     // Format pesan
     const message = `Halo Admin PPDB ${sekolah.namaSingkat},
@@ -71,6 +87,34 @@ Mohon informasi mengenai langkah selanjutnya. Terima kasih.`;
           boxShadow: "var(--shadow-lg)",
         }}
       >
+        {ppdbInfo && (
+          <div style={{ marginBottom: 24 }}>
+            <div
+              style={{
+                padding: "12px 18px",
+                borderRadius: 12,
+                textAlign: "center",
+                fontWeight: 600,
+                fontSize: "0.95rem",
+                background: ppdbInfo.is_open ? "rgba(22, 163, 74, 0.1)" : "rgba(239, 68, 68, 0.1)",
+                color: ppdbInfo.is_open ? "#15803d" : "#b91c1c",
+                border: `1px solid ${ppdbInfo.is_open ? "rgba(22, 163, 74, 0.3)" : "rgba(239, 68, 68, 0.3)"}`,
+                marginBottom: 16
+              }}
+            >
+              {ppdbInfo.is_open
+                ? `🟢 Pendaftaran PPDB ${ppdbInfo.tahun_ajaran ? `Tahun Ajaran ${ppdbInfo.tahun_ajaran}` : ""} Sedang DIBUKA`
+                : `🔴 Pendaftaran PPDB ${ppdbInfo.tahun_ajaran ? `Tahun Ajaran ${ppdbInfo.tahun_ajaran}` : ""} Saat Ini DITUTUP`}
+            </div>
+
+            {ppdbInfo.info_biaya && (
+              <div style={{ fontSize: "0.85rem", color: "var(--text-muted)", background: "var(--bg-alt)", padding: "10px 14px", borderRadius: 8, marginBottom: 12 }}>
+                ℹ️ <strong>Informasi Biaya:</strong> {ppdbInfo.info_biaya}
+              </div>
+            )}
+          </div>
+        )}
+
         <form id="daftar-form" noValidate onSubmit={handleSubmit}>
           
           <div className="form-group" style={{ marginBottom: 20 }}>

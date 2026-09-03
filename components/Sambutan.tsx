@@ -9,7 +9,7 @@ export default function Sambutan() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    fetch("/api/sambutan")
+    fetch("/api/sambutan", { cache: "no-store" })
       .then(res => res.json())
       .then(d => setData(d))
       .catch(console.error);

@@ -1,5 +1,6 @@
-import Image from "next/image";
-import db from "@/lib/db";
+"use client";
+
+import { useEffect, useState } from "react";
 import { IconCamera, IconExpand } from "./icons";
 
 interface GalleryPhoto {
@@ -8,17 +9,21 @@ interface GalleryPhoto {
   caption: string;
 }
 
-export default async function Galeri() {
-  let photos: GalleryPhoto[] = [];
-  
-  try {
-    const [rows] = await db.query("SELECT * FROM galeri ORDER BY id DESC LIMIT 8");
-    photos = rows as GalleryPhoto[];
-  } catch (error) {
-    console.error("Error fetching galeri for public:", error);
-  }
+export default function Galeri() {
+  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (photos.length === 0) return null;
+  useEffect(() => {
+    fetch("/api/galeri", { cache: "no-store" })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setPhotos(data);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading || photos.length === 0) return null;
 
   return (
     <section id="galeri" className="section-container" style={{ padding: "80px 24px", backgroundColor: "#f9fafb" }}>
@@ -32,9 +37,12 @@ export default async function Galeri() {
       <div className="galeri-grid">
         {photos.map((photo) => (
           <div key={photo.id} className="galeri-item fade-in-up">
-            {/* Menggunakan background image agar mengisi penuh div seperti versi sebelumnya atau gunakan Image layout fill */}
             <div style={{ position: "relative", width: "100%", height: "100%", minHeight: "250px" }}>
-              <Image src={photo.image || "https://placehold.co/400x300"} alt={photo.caption || "Galeri"} fill style={{ objectFit: "cover" }} />
+              <img
+                src={photo.image || "https://placehold.co/400x300"}
+                alt={photo.caption || "Galeri"}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
             </div>
             <div className="galeri-overlay">
               <div className="galeri-overlay-content">

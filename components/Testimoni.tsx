@@ -1,5 +1,6 @@
-import Image from "next/image";
-import db from "@/lib/db";
+"use client";
+
+import { useEffect, useState } from "react";
 import { IconQuote } from "./icons";
 
 interface TestimoniItem {
@@ -10,17 +11,21 @@ interface TestimoniItem {
   image: string;
 }
 
-export default async function Testimoni() {
-  let testimonis: TestimoniItem[] = [];
-  
-  try {
-    const [rows] = await db.query("SELECT * FROM testimoni ORDER BY id DESC LIMIT 3");
-    testimonis = rows as TestimoniItem[];
-  } catch (error) {
-    console.error("Error fetching testimoni for public:", error);
-  }
+export default function Testimoni() {
+  const [testimonis, setTestimonis] = useState<TestimoniItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  if (testimonis.length === 0) return null;
+  useEffect(() => {
+    fetch("/api/testimoni", { cache: "no-store" })
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setTestimonis(data.slice(0, 6));
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading || testimonis.length === 0) return null;
 
   return (
     <section id="testimoni" className="section-container" style={{ padding: "80px 24px", backgroundColor: "#f9fafb" }}>
@@ -39,8 +44,12 @@ export default async function Testimoni() {
             </div>
             <p className="testimoni-text">&quot;{item.quote}&quot;</p>
             <div className="testimoni-author">
-              <div className="testimoni-avatar">
-                <Image src={item.image || "https://placehold.co/100"} alt={item.name} fill style={{ objectFit: "cover" }} />
+              <div className="testimoni-avatar" style={{ position: "relative", overflow: "hidden" }}>
+                <img
+                  src={item.image || "https://placehold.co/100"}
+                  alt={item.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </div>
               <div className="testimoni-info">
                 <h4 className="testimoni-name">{item.name}</h4>

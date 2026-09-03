@@ -14,7 +14,7 @@ export default function VisiMisiCard() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    fetch("/api/visi-misi")
+    fetch("/api/visi-misi", { cache: "no-store" })
       .then(res => res.json())
       .then(d => setData(d))
       .catch(console.error);

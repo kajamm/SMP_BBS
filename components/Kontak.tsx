@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { sekolah } from "@/data/sekolah";
 import {
   IconPhoneCall,
@@ -19,6 +19,25 @@ export default function Kontak() {
   const [sending, setSending] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState({ nama: "", email: "", subjek: "", pesan: "" });
+
+  const [pengaturan, setPengaturan] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("/api/pengaturan", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((d) => {
+        if (d && !d.error) setPengaturan(d);
+      })
+      .catch(() => {});
+  }, []);
+
+  const alamat = (pengaturan?.alamat && pengaturan.alamat.trim()) || sekolah.alamat;
+  const telepon = (pengaturan?.telepon && pengaturan.telepon.trim()) || sekolah.telepon;
+  const whatsapp = (pengaturan?.whatsapp && pengaturan.whatsapp.trim()) || sekolah.whatsapp;
+  const email = (pengaturan?.email && pengaturan.email.trim()) || sekolah.email;
+  const instagramUrl = (pengaturan?.instagramUrl && pengaturan.instagramUrl.trim()) || sekolah.instagramUrl;
+  const tiktokUrl = (pengaturan?.tiktokUrl && pengaturan.tiktokUrl.trim()) || sekolah.tiktokUrl;
+  const youtubeUrl = (pengaturan?.youtubeUrl && pengaturan.youtubeUrl.trim()) || sekolah.youtubeUrl;
 
   const handleChange =
     (field: keyof typeof form) =>
@@ -62,7 +81,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <div className="kontak-info-label">Alamat</div>
-                    <div className="kontak-info-value">{sekolah.alamat}</div>
+                    <div className="kontak-info-value">{alamat}</div>
                   </div>
                 </li>
                 <li className="kontak-info-item">
@@ -71,8 +90,8 @@ export default function Kontak() {
                   </div>
                   <div>
                     <div className="kontak-info-label">Kontak (Telepon/WA)</div>
-                    <a href={`https://wa.me/${sekolah.whatsapp}`} target="_blank" rel="noopener noreferrer" className="kontak-info-value" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseOver={(e) => e.currentTarget.style.color = "var(--primary)"} onMouseOut={(e) => e.currentTarget.style.color = "inherit"}>
-                      {sekolah.telepon}
+                    <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer" className="kontak-info-value" style={{ textDecoration: "none", color: "inherit", transition: "color 0.2s" }} onMouseOver={(e) => e.currentTarget.style.color = "var(--primary)"} onMouseOut={(e) => e.currentTarget.style.color = "inherit"}>
+                      {telepon}
                     </a>
                   </div>
                 </li>
@@ -82,7 +101,7 @@ export default function Kontak() {
                   </div>
                   <div>
                     <div className="kontak-info-label">Email</div>
-                    <div className="kontak-info-value">{sekolah.email}</div>
+                    <div className="kontak-info-value">{email}</div>
                   </div>
                 </li>
               </ul>
@@ -121,15 +140,15 @@ export default function Kontak() {
             <div className="sosmed-section">
               <h3 className="sosmed-title">Ikuti Kami di Media Sosial</h3>
               <div className="sosmed-links">
-                <a href={sekolah.instagramUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn instagram" aria-label={`Instagram ${sekolah.namaSingkat}`}>
+                <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn instagram" aria-label={`Instagram ${sekolah.namaSingkat}`}>
                   <IconInstagram />
                   Instagram
                 </a>
-                <a href={sekolah.tiktokUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn" style={{backgroundColor: '#000', color: '#fff'}} aria-label={`TikTok ${sekolah.namaSingkat}`}>
+                <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn" style={{backgroundColor: '#000', color: '#fff'}} aria-label={`TikTok ${sekolah.namaSingkat}`}>
                   <IconTiktok />
                   TikTok
                 </a>
-                <a href={sekolah.youtubeUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn youtube" aria-label={`YouTube ${sekolah.namaSingkat}`}>
+                <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="sosmed-btn youtube" aria-label={`YouTube ${sekolah.namaSingkat}`}>
                   <IconYoutube />
                   YouTube
                 </a>
