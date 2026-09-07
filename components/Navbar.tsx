@@ -236,7 +236,7 @@ export default function Navbar() {
                return (
                  <li key={item.label} style={{display: "flex", flexDirection: "column"}}>
                    <div style={{fontWeight: 600, color: "var(--text)", padding: "10px 0", fontSize: "0.9375rem"}}>
-                     {item.emoji} {item.label}
+                     {item.label}
                    </div>
                    <div style={{display: "flex", flexDirection: "column", paddingLeft: "24px", gap: "8px", borderLeft: "2px solid var(--border)", marginLeft: "12px", marginBottom: "8px"}}>
                       {item.subItems.map(sub => (
@@ -262,7 +262,7 @@ export default function Navbar() {
                   href={item.href!}
                   className={`mobile-nav-link ${isActive ? "active" : ""}`}
                 >
-                  {item.emoji} {item.label}
+                  {item.label}
                 </Link>
               </li>
             );

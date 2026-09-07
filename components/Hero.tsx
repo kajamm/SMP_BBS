@@ -108,9 +108,21 @@ export default function Hero() {
               Membangun fondasi akhlak islami, karakter tangguh, dan kecakapan abad 21 melalui pendekatan belajar yang smart, modern, dan penuh kekeluargaan.
             </p>
 
+            <style dangerouslySetInnerHTML={{
+              __html: `
+                .btn-cta-mobile { display: none !important; }
+                .btn-cta-desktop { display: inline-flex !important; }
+                @media (max-width: 768px) {
+                  .btn-cta-mobile { display: inline-flex !important; }
+                  .btn-cta-desktop { display: none !important; }
+                }
+              `
+            }} />
             <div style={{ display: "flex", gap: "20px", justifyContent: "center", flexWrap: "wrap" }}>
+              {/* Tombol Khusus Mobile */}
               <a
-                href="/profil"
+                href="/daftar"
+                className="btn-cta-mobile"
                 style={{
                   padding: "18px 40px",
                   backgroundColor: "var(--brand-green)",
@@ -118,7 +130,35 @@ export default function Hero() {
                   borderRadius: "99px",
                   fontWeight: 700,
                   fontSize: "1.05rem",
-                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 10px 25px rgba(22, 163, 74, 0.3)"
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                  e.currentTarget.style.boxShadow = "0 15px 35px rgba(22, 163, 74, 0.45)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 10px 25px rgba(22, 163, 74, 0.3)";
+                }}
+              >
+                Daftar Sekarang
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+
+              {/* Tombol Khusus Desktop */}
+              <a
+                href="/profil"
+                className="btn-cta-desktop"
+                style={{
+                  padding: "18px 40px",
+                  backgroundColor: "var(--brand-green)",
+                  color: "black",
+                  borderRadius: "99px",
+                  fontWeight: 700,
+                  fontSize: "1.05rem",
                   alignItems: "center",
                   gap: "10px",
                   transition: "all 0.3s ease",
@@ -138,6 +178,7 @@ export default function Hero() {
               </a>
               <a
                 href="/ekstrakurikuler"
+                className="btn-cta-desktop"
                 style={{
                   padding: "18px 40px",
                   backgroundColor: "var(--brand-green)",
@@ -145,7 +186,6 @@ export default function Hero() {
                   borderRadius: "99px",
                   fontWeight: 700,
                   fontSize: "1.05rem",
-                  display: "inline-flex",
                   alignItems: "center",
                   gap: "10px",
                   transition: "all 0.3s ease",

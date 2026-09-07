@@ -10,23 +10,14 @@ interface EkskulItem {
   foto?: string;
 }
 
-const defaultEkskuls: EkskulItem[] = [
-  { nama: "Pramuka", kategori: "Wajib", deskripsi: "Membentuk karakter disiplin, mandiri, dan gotong royong." },
-  { nama: "Pencak Silat", kategori: "Olahraga", deskripsi: "Membina ketangkasan fisik dan pelestarian budaya bangsa." },
-  { nama: "Futsal", kategori: "Olahraga", deskripsi: "Wadah penyaluran bakat olahraga sepak bola dalam ruangan." },
-  { nama: "Tahfidz Quran", kategori: "Keagamaan", deskripsi: "Bimbingan hafalan Al-Quran dengan target capaian khusus." },
-  { nama: "English Club", kategori: "Akademik", deskripsi: "Melatih kemampuan berbahasa Inggris aktif dan pasif." },
-  { nama: "Karya Ilmiah Remaja (KIR)", kategori: "Akademik", deskripsi: "Mengembangkan nalar kritis dan budaya meneliti bagi siswa." },
-];
-
 export default function EkstrakurikulerPage() {
-  const [items, setItems] = useState<EkskulItem[]>(defaultEkskuls);
+  const [items, setItems] = useState<EkskulItem[]>([]);
 
   useEffect(() => {
     fetch("/api/ekskul", { cache: "no-store" })
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setItems(data);
         }
       })
