@@ -7,11 +7,26 @@ export const metadata: Metadata = {
     "Website resmi SMP PLUS BABUSSALAM - Sekolah unggulan yang berdedikasi mencetak generasi cerdas, berkarakter, dan berdaya saing global.",
   keywords: "SMP Plus Babussalam, profil sekolah, SMP terbaik",
   authors: [{ name: "SMP Plus Babussalam" }],
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "SMP Plus Babussalam",
     description:
       "Sekolah unggulan yang berdedikasi mencetak generasi cerdas, berkarakter, dan berdaya saing global.",
     type: "website",
+    url: "https://smpplusbabussalam.my.id",
+    siteName: "SMP Plus Babussalam",
+    images: [
+      {
+        url: "https://smpplusbabussalam.my.id/icon.png",
+        width: 512,
+        height: 512,
+        alt: "Logo SMP Plus Babussalam",
+      }
+    ]
   },
 };
 
