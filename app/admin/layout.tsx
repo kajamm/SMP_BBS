@@ -156,7 +156,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           logout();
           router.replace("/admin/login");
         }
-      }, 900000);
+      }, 1200000); // 20 minutes
     };
     if (ready && !isLoginPage) {
       resetTimer();

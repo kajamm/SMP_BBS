@@ -40,7 +40,7 @@ export default function Hero() {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        background: "linear-gradient(rgba(252, 252, 249, 0.85), rgba(252, 252, 249, 0.95)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat",
+        background: "linear-gradient(rgba(252, 252, 249, 0.65), rgba(252, 252, 249, 0.8)), url('/gedung-sekolah.png') top center/cover no-repeat",
         position: "relative",
         overflow: "hidden"
       }}>
