@@ -266,4 +266,14 @@ INSERT IGNORE INTO wali_kelas_tugas (id, judul, deskripsi, urutan) VALUES
     (6, 'Pencatatan Mutasi', 'Mencatat mutasi atau perpindahan siswa yang terjadi di dalam kelasnya selama tahun ajaran berjalan.', 6),
     (7, 'Pelaporan Hasil Belajar', 'Mengisi dan membagikan buku laporan penilaian hasil belajar (rapor) kepada orang tua/wali murid.', 7);
 
-
+-- 17. Tokoh Pendiri & Pimpinan Pesantren
+CREATE TABLE IF NOT EXISTS tokoh_pesantren (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    jabatan VARCHAR(255) NOT NULL,
+    role ENUM('pendiri','pimpinan','ketua_yayasan') DEFAULT 'pendiri',
+    foto TEXT,
+    deskripsi TEXT,
+    urutan INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

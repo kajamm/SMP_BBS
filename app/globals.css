@@ -565,7 +565,7 @@ ul {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 /* Area above stats strip */
@@ -573,9 +573,9 @@ ul {
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
-    padding: 100px 48px 48px;
+    padding: 0 48px 48px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 40px;
 }
 

@@ -34,7 +34,7 @@ export default function Hero() {
 
       {/* Main Hero Content - full width, text anchored to bottom-left */}
       <div className="hero-content-pb" style={{
-        padding: "100px 24px 80px",
+        padding: "70px 24px 80px",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
